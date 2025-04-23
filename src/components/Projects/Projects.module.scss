@@ -1,7 +1,10 @@
+@use "sass:color";
+
 .projects {
   justify-content: center;
   align-items: center;
   text-align: center; // Центрируем заголовок
+  overflow: visible; // Добавляем здесь!
 
   h2 {
     font-size: 2.5rem;
@@ -10,76 +13,527 @@
   }
 }
 
-.projectsGrid {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(300px, 1fr)
-  ); // Адаптивная сетка
-  gap: 30px; // Пространство между карточками
-  max-width: 1200px; // Ограничим максимальную ширину
+// Новые стили для двухколоночного макета
+.projectDisplay {
+  display: flex;
+  gap: 20px; // Уменьшено до 20px
+  align-items: flex-start;
+  max-width: 1200px;
   width: 100%;
+  margin: 0 auto;
+  overflow: visible;
 }
 
-.projectCard {
-  background-color: #1a1a1a; // Темно-серый фон для карточек
-  padding: 25px;
-  border-radius: 12px; // Скругленные углы
-  border: 1px solid #333; // Тонкая рамка
-  text-align: left; // Выравниваем текст в карточке по левому краю
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.infoColumn {
+  flex: 1;
   display: flex;
-  flex-direction: column; // Элементы в столбец
-  gap: 15px; // Отступы между элементами внутри карточки
+  flex-direction: column;
+  // Создаем совершенно новый стиль
+  padding: 0; // Убираем паддинг, будем использовать внутренние элементы
+  border-radius: 20px;
+  background: none; // Убираем фон самой колонки
+  position: relative;
+  // Убираем тени, они будут у внутренних элементов
+  border: none;
+  height: 100%;
+
+  // Новая структура: заголовок с номером -> описание -> навыки -> навигация
+
+  // Заголовок с номером проекта
+  h3 {
+    display: flex;
+    align-items: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 25px;
+    padding-left: 15px;
+    position: relative;
+
+    // Добавляем акцентный блок слева
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 70%;
+      background: var(--accent-purple);
+      border-radius: 3px;
+    }
+
+    // Добавляем номер проекта справа
+    &::after {
+      content: attr(data-number); // будет задаваться через JavaScript
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--accent-purple);
+      margin-left: auto;
+      background: rgba(var(--accent-purple-rgb), 0.1);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+  }
+
+  // Контейнер описания
+  .projectDescription {
+    background: rgba(15, 15, 15, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+    p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0;
+
+      // Убираем стилизацию первой буквы, т.к. не вписывается в общий стиль
+      &::first-letter {
+        font-size: inherit;
+        color: inherit;
+      }
+    }
+  }
+
+  // Контейнер для блока навыков
+  .skills {
+    margin: 0 0 20px 0;
+
+    // Заголовок блока навыков
+    strong {
+      display: block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 12px;
+      padding-left: 15px;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        background: rgba(var(--accent-purple-rgb), 0.08);
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(var(--accent-purple-rgb), 0.2);
+        color: var(--accent-purple);
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+        cursor: default;
+
+        &:hover {
+          background: rgba(var(--accent-purple-rgb), 0.15);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+
+  // Блок навигации
+  .navigation {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto; // Прижимаем к низу
+    padding: 20px 15px; // Добавляем отступы
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+    // Счетчик в центре
+    span {
+      margin: 0 auto; // Центрируем
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 400;
+      padding: 4px 8px;
+      min-width: 50px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+    }
+
+    // Кнопки навигации
+    button {
+      background: rgba(var(--accent-purple-rgb), 0.1);
+      border: 1px solid rgba(var(--accent-purple-rgb), 0.15);
+      color: var(--accent-purple);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+
+      svg {
+        font-size: 1rem;
+      }
+
+      &:hover {
+        background: var(--accent-purple);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(var(--accent-purple-rgb), 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+.previewColumn {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Центрируем элементы
+  justify-content: flex-start; // Выравниваем сверху
+  gap: 20px; // Добавляем отступ между элементами
+  position: relative;
+  min-height: 400px; // Увеличиваем высоту для лучшей композиции
+  padding-bottom: 20px;
+  overflow: visible;
+  margin-left: -30px;
+}
+
+// Плейсхолдеры для ноутбука и телефона
+.laptopPreview,
+.phonePreview {
+  // background-color: #2a2a2a; // Заменим на градиент или более сложный фон
+  border: none; // Убираем старую границу
+  // padding: 15px; // Убираем общий padding, будем управлять через размеры экрана/корпуса
+  display: flex; // Оставляем flex для выравнивания экрана
+  justify-content: center;
+  align-items: center;
+  // Добавим тени для объема
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+}
+
+.laptopPreview {
+  // Увеличиваем размеры ноутбука
+  height: 340px; // Было 300px
+  width: 540px; // Было 480px
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(145deg, #383838, #1f1f1f);
+  border-radius: 12px;
+  padding: 12px;
+  margin-left: -20px;
+  transform: perspective(800px) rotateX(5deg); // Добавляем небольшой наклон для 3D-эффекта
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 5%;
+    width: 90%;
+    height: 12px;
+    background: linear-gradient(180deg, #222, #111);
+    border-radius: 0 0 8px 8px;
+    z-index: -1;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.3))
+    drop-shadow(-1px -1px 3px rgba(80, 80, 80, 0.1));
+}
+
+// Перемещаем кнопку над телефоном
+.projectButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--accent-purple);
+  color: #fff;
+  padding: 12px 24px; // Делаем чуть шире
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  margin: 30px auto 15px; // Меняем отступы
+  width: fit-content;
+  min-width: 180px; // Минимальная ширина для обеих кнопок
+  height: 48px; // Фиксированная высота для обеих кнопок
+  border: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(var(--accent-purple-rgb), 0.3);
+  letter-spacing: 0.5px;
+  z-index: 3;
+  position: relative;
+
+  // Стиль для текста внутри кнопки
+  span {
+    font-size: 1rem;
+  }
+
+  // Иконка внутри кнопки
+  svg {
+    font-size: 0.85rem;
+    transition: transform 0.25s ease;
+  }
 
   &:hover {
-    transform: translateY(-5px); // Легкий подъем при наведении
-    box-shadow: 0 8px 20px rgba(var(--accent-purple), 0.2); // Фиолетовая тень
+    background-color: color.adjust(#8860e6, $lightness: 5%);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 15px rgba(var(--accent-purple-rgb), 0.4);
+
+    svg {
+      transform: translate(3px, -3px);
+    }
   }
 
-  h3 {
-    font-size: 1.5rem;
-    color: var(--accent-purple); // Акцентный цвет для заголовка карточки
-    margin-bottom: 5px; // Уменьшим отступ
-  }
-
-  p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #ccc;
-    flex-grow: 1; // Позволяет описанию занять доступное место
-  }
-
-  span {
-    font-size: 0.9rem;
-    color: #aaa; // Приглушенный цвет для достижений
-    font-style: italic;
-    margin-top: auto; // Прижимает achievement к низу карточки
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(var(--accent-purple-rgb), 0.25);
   }
 }
 
-// Адаптация для меньших экранов
+.phoneContainer {
+  position: absolute;
+  bottom: -50px; // Смещаем ниже
+  right: 60px; // Смещаем больше вправо
+  z-index: 2;
+  width: 180px; // Уменьшаем размер (было 220px)
+  height: 320px; // Уменьшаем размер (было 380px)
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+  overflow: visible;
+  transform: rotate(5deg); // Небольшой наклон для динамичности
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    overflow: visible;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}
+
+.laptopScreen,
+.phoneScreen {
+  background-color: #111; // Экран
+  width: 100%;
+  height: 100%;
+  // display: flex; // Убираем flex, чтобы iframe мог занять все место
+  // justify-content: center;
+  // align-items: center;
+  // color: #555;
+  // font-style: italic;
+  overflow: hidden; // Скрываем все, что выходит за рамки экрана
+  border-radius: 6px; // Чуть больше скругление экрана
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block; // Убирает лишние отступы
+    border-radius: 5px; // Должно быть чуть меньше радиуса .laptopScreen
+  }
+}
+
+.laptopScreen {
+  // Добавляем внутреннюю тень для эффекта стекла/глубины
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+
+  iframe {
+    width: 1440px; // Устанавливаем фиксированную большую ширину
+    height: 900px; // И высоту как у десктопа
+    border: none;
+    transform: scale(0.375); // Масштабируем для уменьшения
+    transform-origin: 0 0; // Трансформация начинается от верхнего левого угла
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.phoneScreen {
+  background-color: #000; // Экран черный
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px; // Скругление для экрана внутри рамки
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+}
+
+// Обновляем адаптивные стили
+@media (max-width: 992px) {
+  .previewColumn {
+    margin-left: 0;
+    align-items: center;
+    min-height: auto;
+  }
+
+  .laptopPreview {
+    margin-left: 0;
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    transform: none; // Убираем наклон на мобильных
+  }
+
+  .phoneContainer {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    width: 160px;
+    height: 280px;
+    margin: 0 auto;
+    transform: none; // Убираем наклон на мобильных
+  }
+
+  .projectButton {
+    margin: 20px auto;
+  }
+
+  .infoColumn {
+    h3 {
+      font-size: 2rem;
+    }
+
+    .projectDescription {
+      padding: 20px;
+    }
+
+    .navigation {
+      padding: 15px;
+
+      button {
+        width: 38px;
+        height: 38px;
+      }
+    }
+  }
+
+  .laptopScreen {
+    iframe {
+      width: 1440px;
+      transform: scale(0.345); // Уменьшаем масштаб для меньших экранов
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .projects h2 {
     font-size: 2rem;
     margin-bottom: 30px;
   }
 
-  .projectsGrid {
-    grid-template-columns: 1fr; // Одна карточка в ряд
-    max-width: 90%;
-    gap: 20px;
+  .previewColumn {
+    gap: 15px;
   }
 
-  .projectCard {
-    padding: 20px;
+  .laptopPreview {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
 
+  .phoneContainer {
+    width: 180px;
+    height: 315px;
+    margin-top: 15px;
+  }
+
+  .infoColumn {
     h3 {
-      font-size: 1.3rem;
+      font-size: 1.8rem;
     }
 
-    p {
-      font-size: 0.95rem;
+    .projectDescription {
+      padding: 18px;
     }
+  }
+
+  .projectButton {
+    margin: 15px auto;
+  }
+
+  .laptopScreen {
+    iframe {
+      transform: scale(0.31); // Еще меньше масштаб для мобильных
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .phoneContainer {
+    width: 160px;
+    height: 280px;
+    margin-top: 10px;
+  }
+
+  .infoColumn {
+    h3 {
+      font-size: 1.7rem;
+    }
+  }
+
+  .laptopScreen {
+    iframe {
+      transform: scale(0.28); // Масштаб для самых маленьких экранов
+    }
+  }
+}
+
+.inactiveButton {
+  background-color: #4a4a4a;
+  opacity: 0.8;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: #4a4a4a;
+    transform: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.devPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #111111;
+  color: #444;
+  font-family: monospace;
+
+  div {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
