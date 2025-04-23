@@ -21,22 +21,18 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
     );
     if (dotWrappers.length !== sections.length) return;
 
-    const containerPaddingTop = 25;
-    const containerPaddingBottom = 25;
-    const totalPadding = containerPaddingTop + containerPaddingBottom;
-
     let activeLineHeight = 0;
-    const containerHeight = container.offsetHeight;
+    const containerHeight = window.innerHeight;
 
     if (currentSectionIndex >= 0 && currentSectionIndex < sections.length) {
       if (currentSectionIndex === sections.length - 1) {
-        activeLineHeight = containerHeight - totalPadding;
+        activeLineHeight = containerHeight;
       } else {
         const targetWrapper = dotWrappers[currentSectionIndex];
         if (targetWrapper) {
-          const targetCenterY =
-            targetWrapper.offsetTop + targetWrapper.offsetHeight / 2;
-          activeLineHeight = Math.max(0, targetCenterY - containerPaddingTop);
+          const rect = targetWrapper.getBoundingClientRect();
+          const targetCenterY = rect.top + rect.height / 2;
+          activeLineHeight = Math.max(0, targetCenterY);
         }
       }
     }

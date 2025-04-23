@@ -1,23 +1,32 @@
 .indicatorContainer {
   position: fixed;
-  right: 55px; // Еще отодвинем
-  top: 50%;
-  transform: translateY(-50%);
+  right: 55px;
+  top: 0;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 10; // Убедимся, что индикатор поверх остального контента
-  padding: 30px 0; // Увеличим отступы
+  justify-content: center;
+  z-index: 10;
+  padding: 0;
 
   // Неактивная часть линии (полная высота)
   &::before {
     content: "";
     position: absolute;
-    top: 30px; // Синхронизируем
-    bottom: 30px;
-    left: calc(50% - 2.5px); // Центрируем линию (ширина 5px)
-    width: 5px; // Еще толще
-    background-color: #444; // Цвет неактивной линии
+    top: 0;
+    bottom: 0;
+    left: calc(50% - 2.5px);
+    width: 5px;
+    background: linear-gradient(
+      to bottom,
+      rgba(68, 68, 68, 0),
+      rgba(68, 68, 68, 0.7) 15%,
+      rgba(68, 68, 68, 1) 20%,
+      rgba(68, 68, 68, 1) 80%,
+      rgba(68, 68, 68, 0.7) 90%,
+      rgba(68, 68, 68, 0)
+    );
     z-index: 0;
     border-radius: 2px;
   }
@@ -26,14 +35,22 @@
   &::after {
     content: "";
     position: absolute;
-    top: 30px;
+    top: 0;
     left: calc(50% - 2.5px);
     width: 5px;
-    background-color: var(--accent-purple); // Цвет активной линии
-    z-index: 0; // Тот же z-index, что и у ::before
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--accent-purple-rgb), 0),
+      rgba(var(--accent-purple-rgb), 0.7) 15%,
+      rgba(var(--accent-purple-rgb), 1) 20%,
+      rgba(var(--accent-purple-rgb), 1) 85%,
+      rgba(var(--accent-purple-rgb), 0.7) 95%,
+      rgba(var(--accent-purple-rgb), 0) 100%
+    );
+    z-index: 0;
     border-radius: 2px;
-    height: var(--active-line-height, 0px); // Высота из JS
-    transition: height 0.4s ease-in-out; // Плавное изменение высоты
+    height: var(--active-line-height, 0px);
+    transition: height 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 }
 
@@ -50,15 +67,16 @@
 
 .dot {
   display: block;
-  width: 30px; // Финальное увеличение точек
+  width: 30px;
   height: 30px;
-  background-color: #333; // Еще темнее неактивные
+  background-color: #333;
   border-radius: 50%;
-  transition: background-color 0.4s ease, transform 0.3s ease;
+  transition: background-color 0.6s ease,
+    transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
-  border: 5px solid var(--background); // Толще обводка
+  border: 5px solid var(--background);
   transform: scale(1);
-  position: relative; // Чтобы быть над псевдоэлементом линии
+  position: relative;
   z-index: 1;
 
   &:hover {
@@ -83,25 +101,23 @@
   display: block;
   color: var(--accent-purple);
   font-family: var(--font-geist-mono);
-  font-size: 1.25rem; // Немного крупнее шрифт
+  font-size: 1.25rem;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
-  padding: 8px 14px; // Увеличим паддинги
+  padding: 8px 14px;
   line-height: 1.2;
-  transition: transform 0.3s ease, color 0.3s ease;
-  transform: scale(
-    1
-  ); // Убираем начальное увеличение, т.к. есть min-height у wrapper
-  position: relative; // Чтобы быть над псевдоэлементом линии
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    color 0.5s ease;
+  transform: scale(1);
+  position: relative;
   z-index: 1;
-  // Добавляем фон или обводку, чтобы текст был читаем поверх линии
-  background: #1a1a1a; // Темно-серый фон вместо черного
-  border-radius: 4px; // Небольшое скругление
-  width: max-content; // Ширина по содержимому
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 4px;
+  width: max-content;
 
   &:hover {
-    transform: scale(1.05); // Небольшое увеличение при наведении
+    transform: scale(1.05);
     color: #d19bff;
   }
 }

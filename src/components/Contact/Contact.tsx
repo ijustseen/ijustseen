@@ -13,6 +13,7 @@ import {
   FaServer,
   FaReact,
   FaNodeJs,
+  FaDiscord,
 } from "react-icons/fa";
 
 const Contact = () => {
@@ -120,6 +121,14 @@ const Contact = () => {
       link: "https://t.me/ijustseen",
       text: "ijustseen",
       tags: ["Fast Response", "Direct Contact"],
+    },
+    {
+      id: "discord",
+      icon: <FaDiscord />,
+      title: "Discord",
+      link: "https://discord.com/users/ijustseen",
+      text: "ijustseen",
+      tags: ["Community", "Game Devs"],
     },
   ];
 
