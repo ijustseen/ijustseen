@@ -1,0 +1,65 @@
+.contact {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px; // Уменьшим отступ
+    color: var(--accent-purple);
+  }
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #aaa;
+  margin-bottom: 40px; // Отступ после подзаголовка
+  max-width: 500px; // Ограничим ширину
+}
+
+.links {
+  display: flex;
+  flex-direction: column; // Ссылки в столбец
+  gap: 20px; // Пространство между ссылками
+  margin-bottom: 40px; // Отступ до местоположения
+}
+
+.linkItem {
+  font-size: 1.3rem;
+  color: var(--foreground);
+  transition: color 0.3s ease;
+  display: inline-block; // Чтобы ховер эффект был по размеру текста
+
+  &:hover {
+    color: var(--accent-purple); // Фиолетовый цвет при наведении
+    text-decoration: underline; // Подчеркивание при наведении
+    text-underline-offset: 4px;
+  }
+}
+
+.location {
+  font-size: 1rem;
+  color: #888; // Еще более приглушенный цвет
+}
+
+// Адаптация для меньших экранов
+@media (max-width: 768px) {
+  .contact h2 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    max-width: 90%;
+  }
+
+  .links {
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .linkItem {
+    font-size: 1.1rem;
+  }
+}

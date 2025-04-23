@@ -1,0 +1,79 @@
+.about {
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  gap: 50px; // Пространство между блоками "Обо мне" и "Навыки"
+  max-width: 1000px; // Ограничим ширину контейнера
+  width: 100%;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--accent-purple); // Используем акцентный цвет для заголовков
+    text-align: left;
+  }
+}
+
+.aboutMe {
+  flex: 1; // Занимает доступное пространство
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ccc; // Светло-серый текст для лучшей читаемости
+    text-align: left;
+  }
+}
+
+.skills {
+  flex: 1; // Занимает доступное пространство
+
+  ul {
+    list-style: none; // Убираем маркеры списка
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; // Позволяем элементам переноситься
+    gap: 10px; // Пространство между навыками
+  }
+
+  li {
+    background-color: rgba(var(--accent-purple), 0.15); // Полупрозрачный фон
+    color: var(--accent-purple); // Акцентный цвет текста
+    padding: 8px 15px;
+    border-radius: 20px; // Скругленные углы
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 1px solid rgba(var(--accent-purple), 0.3); // Тонкая рамка
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: var(--accent-purple);
+      color: var(--background); // Цвет фона при наведении
+    }
+  }
+}
+
+// Адаптация для меньших экранов
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; // Ставим блоки друг под другом
+    gap: 40px;
+    max-width: 90%;
+
+    h2 {
+      font-size: 2rem;
+      text-align: center;
+    }
+  }
+
+  .aboutMe p {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .skills ul {
+    justify-content: center; // Центрируем навыки
+  }
+}

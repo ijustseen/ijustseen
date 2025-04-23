@@ -1,0 +1,114 @@
+.indicatorContainer {
+  position: fixed;
+  right: 55px; // Еще отодвинем
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10; // Убедимся, что индикатор поверх остального контента
+  padding: 30px 0; // Увеличим отступы
+
+  // Неактивная часть линии (полная высота)
+  &::before {
+    content: "";
+    position: absolute;
+    top: 30px; // Синхронизируем
+    bottom: 30px;
+    left: calc(50% - 2.5px); // Центрируем линию (ширина 5px)
+    width: 5px; // Еще толще
+    background-color: #444; // Цвет неактивной линии
+    z-index: 0;
+    border-radius: 2px;
+  }
+
+  // Активная (фиолетовая) часть линии (высота задается через --active-line-height)
+  &::after {
+    content: "";
+    position: absolute;
+    top: 30px;
+    left: calc(50% - 2.5px);
+    width: 5px;
+    background-color: var(--accent-purple); // Цвет активной линии
+    z-index: 0; // Тот же z-index, что и у ::before
+    border-radius: 2px;
+    height: var(--active-line-height, 0px); // Высота из JS
+    transition: height 0.4s ease-in-out; // Плавное изменение высоты
+  }
+}
+
+.dotWrapper {
+  position: relative; // Для позиционирования имени секции
+  padding: 24px 0; // Увеличиваем расстояние
+  z-index: 1; // Точки должны быть над линией
+  display: flex; // Для возможного выравнивания имени, хотя оно абсолютно спозиционировано
+  justify-content: center; // Центрируем содержимое (точку или текст)
+  align-items: center;
+  width: 130px; // Чуть шире
+  min-height: 48px; // Увеличиваем мин. высоту
+}
+
+.dot {
+  display: block;
+  width: 30px; // Финальное увеличение точек
+  height: 30px;
+  background-color: #333; // Еще темнее неактивные
+  border-radius: 50%;
+  transition: background-color 0.4s ease, transform 0.3s ease;
+  cursor: pointer;
+  border: 5px solid var(--background); // Толще обводка
+  transform: scale(1);
+  position: relative; // Чтобы быть над псевдоэлементом линии
+  z-index: 1;
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #555;
+  }
+
+  // Стиль для пройденных точек
+  &.active {
+    background-color: var(--accent-purple);
+    box-shadow: 0 0 12px rgba(var(--accent-purple-rgb), 0.6);
+    transform: scale(1.05);
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Стиль для текста текущей секции (вместо точки)
+.currentSectionText {
+  display: block;
+  color: var(--accent-purple);
+  font-family: var(--font-geist-mono);
+  font-size: 1.25rem; // Немного крупнее шрифт
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  padding: 8px 14px; // Увеличим паддинги
+  line-height: 1.2;
+  transition: transform 0.3s ease, color 0.3s ease;
+  transform: scale(
+    1
+  ); // Убираем начальное увеличение, т.к. есть min-height у wrapper
+  position: relative; // Чтобы быть над псевдоэлементом линии
+  z-index: 1;
+  // Добавляем фон или обводку, чтобы текст был читаем поверх линии
+  background: #1a1a1a; // Темно-серый фон вместо черного
+  border-radius: 4px; // Небольшое скругление
+  width: max-content; // Ширина по содержимому
+
+  &:hover {
+    transform: scale(1.05); // Небольшое увеличение при наведении
+    color: #d19bff;
+  }
+}
+
+// Адаптация для меньших экранов (можно скрыть индикатор)
+@media (max-width: 768px) {
+  .indicatorContainer {
+    display: none; // Скрываем индикатор на маленьких экранах
+  }
+}
