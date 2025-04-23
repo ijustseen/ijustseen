@@ -1,36 +1,114 @@
+@keyframes revealUp {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(15px);
+  }
+  to {
+    clip-path: inset(0 0 0% 0);
+    transform: translateY(0);
+  }
+}
+
+// Анимация для градиента
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 .hero {
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  justify-content: center; // Центрируем контент вертикально
-  align-items: center; // Центрируем контент горизонтально
+  position: relative;
+  // overflow: hidden; // Больше не нужно
 }
 
-.content {
-  h1 {
-    font-size: 3.5rem; // Увеличим размер заголовка
-    margin-bottom: 1rem;
-    font-weight: bold;
-    color: var(--foreground); // Используем переменную цвета текста
-  }
-
-  p {
-    font-size: 1.5rem; // Увеличим размер текста
-    margin-bottom: 0.5rem;
-    color: #aaa; // Слегка приглушенный цвет для подзаголовков
-  }
+.contentContainer {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  // Убираем анимацию с контейнера
+  // animation: fadeInSlideUp 0.5s 0.2s ease-out backwards;
+  // z-index: 1; // Больше не нужно, т.к. нет фигур на фоне
 }
 
-.scrollIndicator {
+.title {
+  font-size: 4.5rem;
+  font-weight: bold;
+  line-height: 1.1;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+
+  // Возвращаем градиент
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    #8a2be2,
+    #a040ff,
+    #be75ff,
+    #a040ff,
+    #8a2be2
+  );
+  background-size: 250% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: gradientShift 8s linear infinite;
+
+  // Стили для оберток имени и фамилии
+  .nameSpan,
+  .surnameSpan {
+    display: block;
+    // Анимации появления нет
+  }
+
+  .nameSpan {
+    // Задержки нет
+  }
+
+  .surnameSpan {
+    // Задержки нет
+    // Стили для расположения
+    align-self: stretch;
+    text-align: left;
+    letter-spacing: 6px;
+    padding-right: -6px;
+    margin-top: -10px;
+  }
+
+  // Убедимся, что стилей для .letter нет
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  color: #aaa;
+  margin: 0;
+  font-family: var(--font-geist-mono);
+  // Анимации появления нет
+  max-width: 100%;
+  text-align: left;
+}
+
+.scrollHint {
   position: absolute;
-  bottom: 40px; // Размещаем внизу секции
-  left: 50%;
+  bottom: 40px;
+  left: calc((100% - var(--indicator-reserved-width)) / 2);
   transform: translateX(-50%);
-  color: var(--accent-purple); // Используем акцентный цвет
+  color: var(--accent-purple);
   font-family: var(--font-geist-mono);
   font-size: 0.9rem;
-  animation: bounce 2s infinite; // Добавляем анимацию
+  animation: bounce 2s infinite;
 }
 
-// Анимация для индикатора прокрутки
 @keyframes bounce {
   0%,
   20%,
@@ -47,14 +125,34 @@
   }
 }
 
-// Адаптация для меньших экранов
 @media (max-width: 768px) {
-  .content {
-    h1 {
-      font-size: 2.5rem;
+  .hero {
+    // Центрирование остается
+  }
+  .contentContainer {
+    align-items: center;
+    max-width: 90%;
+  }
+  .title {
+    font-size: 3rem;
+    align-items: center;
+    // Сбрасываем специфичные стили для градиента, если нужно другое поведение на мобильных,
+    // но пока оставим градиент и там.
+    .surnameSpan {
+      // Стили для мобильных остаются
+      align-self: auto;
+      text-align: center;
+      letter-spacing: normal;
+      padding-right: 0;
+      margin-top: 0;
     }
-    p {
-      font-size: 1.2rem;
-    }
+  }
+  .subtitle {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .scrollHint {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
