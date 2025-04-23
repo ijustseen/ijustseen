@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Andrew Eroshenkov
 
-## Getting Started
+**Junior Full-Stack Web Developer — Open to Remote Work**  
+📍 Novi Sad, Serbia  
+📧 anordgame@gmail.com  
+🔗 [GitHub](https://github.com/ijustseen) • [LinkedIn](https://www.linkedin.com/in/andrew-eroshenkov-27235a30b/)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🧑‍💻 About Me
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I'm a self-motivated junior full-stack developer with a strong passion for web technologies and clean UI.  
+I thrive in small, agile teams, and love transforming ideas into real, working products.  
+With a user-focused mindset and a minimalist approach to design, I bring both creativity and structure to my code.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚙️ Tech Stack
 
-## Learn More
+- **Frontend**: React, Next.js, Tailwind CSS, SCSS, Expo React Native
+- **Backend**: REST API, Token-based authentication
+- **Tools**: Git, GitHub, Vercel, VS Code
+- **Other**: AI hackathon experience, App architecture, Chat/Call systems
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Projects
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Learn&Share
 
-## Deploy on Vercel
+A mobile app that connects people who want to teach and learn various skills through video call lessons.  
+Built authentication, profiles, reviews, and teacher discovery features.  
+🏆 Winner of the MTS App Challenge (Serbia)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### DocTalkie
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Hackathon project that uses AI to create custom assistants from uploaded documentation.  
+Worked on the core interface, assistant system, and subscription logic.  
+⚙️ Built with Next.js, deployed as a full MVP.
+
+---
+
+## 🏆 Achievements
+
+- 🥇 **Winner**, MTS App Challenge (Serbia)
+- 🎯 **Finalist**, AI Hackathon (5000+ participants)
+- 🚀 Launched multiple full-stack MVPs as part of a small development team
+
+---
+
+## 💡 Key Strengths
+
+- Ownership mindset & team player
+- Clean design and UX-first thinking
+- Quick learner & tech enthusiast
+- Structured, goal-oriented, and proactive
+- Strong communication skills
+
+---
+
+_Always open to meaningful collaborations, innovative ideas, and great teams._
