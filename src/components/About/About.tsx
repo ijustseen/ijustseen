@@ -2,41 +2,50 @@ import React from "react";
 import styles from "./About.module.scss";
 
 const About = () => {
-  const skills = [
+  const skillsList = [
     "React",
     "Next.js",
-    "Tailwind CSS",
+    "TypeScript",
+    "JavaScript (ES6+)",
+    "HTML5",
+    "CSS3",
     "SCSS",
+    "Tailwind CSS",
     "Expo React Native",
+    "Node.js",
     "REST API",
+    "GraphQL (Basic)",
     "Token-based auth",
     "Git",
     "GitHub",
-    "Vercel",
     "VS Code",
-    "AI hackathon experience",
     "App architecture",
-    "Chat/Call systems",
+    "UI/UX Principles",
+    "Agile Methodologies",
+    "Problem Solving",
   ];
 
   return (
     <section id="about" className={`section ${styles.about}`}>
       <div className={styles.container}>
         <div className={styles.aboutMe}>
-          <h2>Обо мне</h2>
+          <h2>About Me</h2>
           <p>
-            Я целеустремленный junior full-stack разработчик с большой страстью
-            к веб-технологиям и чистому UI. Мне нравится работать в небольших,
-            гибких командах и превращать идеи в реальные, работающие продукты. С
-            ориентированным на пользователя мышлением и минималистичным подходом
-            к дизайну, я привношу креативность и структуру в свой код.
+            I am a dedicated and passionate junior full-stack developer with a
+            strong enthusiasm for web technologies, clean UI, and creating
+            impactful digital experiences. I thrive in collaborative, agile
+            environments and enjoy transforming complex ideas into functional,
+            user-friendly products. With a user-centric mindset and a keen eye
+            for detail, I strive to write clean, maintainable, and efficient
+            code. I&apos;m always eager to learn new technologies and improve my
+            skills.
           </p>
         </div>
         <div className={styles.skills}>
-          <h2>Навыки</h2>
+          <h2>Skills</h2>
           <ul>
-            {skills.map((skill, index) => (
-              <li key={index}>{skill}</li>
+            {skillsList.map((skill) => (
+              <li key={skill}>{skill}</li>
             ))}
           </ul>
         </div>

@@ -1,66 +1,107 @@
 .about {
   align-items: center;
   justify-content: center;
+  // overflow: hidden; // Больше не нужно
 }
 
 .container {
   display: flex;
-  gap: 50px; // Пространство между блоками "Обо мне" и "Навыки"
-  max-width: 1000px; // Ограничим ширину контейнера
+  gap: 50px;
+  max-width: 1000px;
   width: 100%;
+  align-items: flex-start;
 
   h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    color: var(--accent-purple); // Используем акцентный цвет для заголовков
     text-align: left;
   }
 }
 
 .aboutMe {
-  flex: 1; // Занимает доступное пространство
+  flex: 1.2;
+  h2 {
+    color: var(--accent-blue);
+    margin-bottom: 20px; // Вернул стандартный отступ
+    font-size: 2.5rem;
+    text-align: left;
+  }
   p {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #ccc; // Светло-серый текст для лучшей читаемости
+    color: #ccc;
     text-align: left;
   }
 }
 
 .skills {
-  flex: 1; // Занимает доступное пространство
+  flex: 1;
+  // position: relative; // Больше не нужно
+  // overflow: hidden; // Больше не нужно
+
+  h2 {
+    color: var(--accent-purple);
+    margin-bottom: 20px; // Вернул стандартный отступ
+    font-size: 2.5rem;
+    text-align: left;
+  }
+
+  // УДАЛЕН .skillsListContainer
 
   ul {
-    list-style: none; // Убираем маркеры списка
+    list-style: none;
     padding: 0;
+    margin: 0;
     display: flex;
-    flex-wrap: wrap; // Позволяем элементам переноситься
-    gap: 10px; // Пространство между навыками
+    flex-wrap: wrap; // Включаем перенос
+    gap: 10px; // Пространство между элементами
+    // Убираем все лишнее:
+    // flex-direction: column;
+    // align-items: flex-start;
+    // transition: ...;
+    // min-height: ...;
+    // position: relative;
   }
 
   li {
-    background-color: rgba(var(--accent-purple), 0.15); // Полупрозрачный фон
-    color: var(--accent-purple); // Акцентный цвет текста
+    background-color: rgba(var(--accent-purple-rgb), 0.15);
+    color: var(--accent-purple);
     padding: 8px 15px;
-    border-radius: 20px; // Скругленные углы
+    border-radius: 20px;
     font-size: 0.95rem;
     font-weight: 500;
-    border: 1px solid rgba(var(--accent-purple), 0.3); // Тонкая рамка
-    transition: background-color 0.3s, color 0.3s;
+    border: 1px solid rgba(var(--accent-purple-rgb), 0.3);
+    white-space: nowrap;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s ease-out; // Оставляем transition для ховера
+    // Убираем стили анимации и позиционирования:
+    // position: absolute;
+    // left: ...;
+    // opacity: 0;
+    // animation: ...;
+    // transform: ...; // Убираем начальный transform
 
     &:hover {
       background-color: var(--accent-purple);
-      color: var(--background); // Цвет фона при наведении
+      color: var(--background);
+      transform: translateY(-2px) scale(1.02); // Оставляем простой ховер-эффект
+      // Убираем:
+      // z-index: ...;
+      // animation-play-state: paused;
     }
   }
+
+  // УДАЛЕНЫ стили &.skillsHovered
 }
+
+// УДАЛЕН @keyframes continuousFall
 
 // Адаптация для меньших экранов
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; // Ставим блоки друг под другом
+    flex-direction: column;
     gap: 40px;
     max-width: 90%;
+    align-items: center;
 
     h2 {
       font-size: 2rem;
@@ -68,12 +109,59 @@
     }
   }
 
-  .aboutMe p {
-    text-align: center;
-    font-size: 1rem;
+  .aboutMe {
+    flex: none;
+    width: 100%;
+    h2 {
+      // Стили H2 для мобильных
+      font-size: 2rem;
+      text-align: center;
+    }
+    p {
+      text-align: justify;
+      font-size: 1rem; // Вернул размер шрифта для p
+    }
   }
 
-  .skills ul {
-    justify-content: center; // Центрируем навыки
+  .skills {
+    flex: none;
+    width: 100%;
+    h2 {
+      // Стили H2 для мобильных
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    // УДАЛЕН .skillsListContainer в мобильных стилях
+
+    ul {
+      justify-content: center; // Центрируем теги в ряду на мобильных
+      // Убираем:
+      // align-items: center; (для column)
+      // min-height: ...;
+    }
+
+    li {
+      // Сброс специфичных стилей для падающих элементов
+      padding: 8px 15px;
+      font-size: 0.95rem;
+      // left: 50%;
+      // transform: translateX(-50%);
+      // Убедимся, что ховер работает и на мобильных
+      &:hover {
+        transform: translateY(-2px) scale(1.02);
+      }
+    }
+
+    // УДАЛЕНЫ стили &.skillsHovered в мобильных стилях
   }
 }
+
+/*
+:root {
+  --accent-purple: #8a2be2; // Пример значения
+  --accent-purple-rgb: 138, 43, 226; // Соответствующее RGB значение
+  --accent-blue: #007bff; // Пример синего
+  --background: #121212; // Пример фона
+}
+*/
