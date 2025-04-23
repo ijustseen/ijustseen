@@ -6,6 +6,34 @@
   text-align: center; // Центрируем заголовок
   overflow: visible; // Добавляем здесь!
 
+  &.visible {
+    .projectDisplay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .infoColumn,
+    .previewColumn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .laptopPreview {
+      opacity: 1;
+      transform: perspective(800px) rotateX(5deg);
+    }
+
+    .phoneContainer {
+      opacity: 1;
+      transform: rotate(5deg);
+    }
+
+    .projectButton {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   h2 {
     font-size: 2.5rem;
     margin-bottom: 40px; // Увеличим отступ снизу
@@ -22,6 +50,9 @@
   width: 100%;
   margin: 0 auto;
   overflow: visible;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .infoColumn {
@@ -36,6 +67,9 @@
   // Убираем тени, они будут у внутренних элементов
   border: none;
   height: 100%;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
 
   // Новая структура: заголовок с номером -> описание -> навыки -> навигация
 
@@ -208,6 +242,9 @@
   padding-bottom: 20px;
   overflow: visible;
   margin-left: -30px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
 }
 
 // Плейсхолдеры для ноутбука и телефона
@@ -233,7 +270,9 @@
   border-radius: 12px;
   padding: 12px;
   margin-left: -20px;
-  transform: perspective(800px) rotateX(5deg); // Добавляем небольшой наклон для 3D-эффекта
+  transform: perspective(800px) rotateX(10deg); // Добавляем небольшой наклон для 3D-эффекта
+  opacity: 0;
+  transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
 
   &::after {
     content: "";
@@ -274,6 +313,10 @@
   letter-spacing: 0.5px;
   z-index: 3;
   position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.7s, transform 0.6s ease 0.7s,
+    background-color 0.25s, box-shadow 0.25s;
 
   // Стиль для текста внутри кнопки
   span {
@@ -311,7 +354,9 @@
   height: 320px; // Уменьшаем размер (было 380px)
   filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
   overflow: visible;
-  transform: rotate(5deg); // Небольшой наклон для динамичности
+  transform: rotate(10deg); // Небольшой наклон для динамичности
+  opacity: 0;
+  transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s;
 
   canvas {
     display: block;

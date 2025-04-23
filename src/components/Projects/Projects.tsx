@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./Projects.module.scss";
 import { FaArrowLeft, FaArrowRight, FaExternalLinkAlt } from "react-icons/fa";
 import Phone3D from "./Phone3D";
@@ -26,6 +28,29 @@ const projects = [
 
 const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -42,7 +67,13 @@ const Projects = () => {
   const currentProject = projects[currentIndex];
 
   return (
-    <section id="projects" className={`section ${styles.projects}`}>
+    <section
+      id="projects"
+      className={`section ${styles.projects} ${
+        isVisible ? styles.visible : ""
+      }`}
+      ref={containerRef}
+    >
       <div className={styles.projectDisplay}>
         <div className={styles.infoColumn}>
           <h3 data-number={`0${currentIndex + 1}`}>{currentProject.title}</h3>

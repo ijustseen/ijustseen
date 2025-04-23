@@ -2,14 +2,26 @@
   from {
     clip-path: inset(0 0 100% 0);
     transform: translateY(15px);
+    opacity: 0;
   }
   to {
     clip-path: inset(0 0 0% 0);
     transform: translateY(0);
+    opacity: 1;
   }
 }
 
-// Анимация для градиента
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes gradientShift {
   0%,
   100% {
@@ -25,7 +37,29 @@
   align-items: center;
   text-align: center;
   position: relative;
-  // overflow: hidden; // Больше не нужно
+
+  &.visible {
+    .contentContainer {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .nameSpan {
+      animation: revealUp 0.8s ease-out forwards;
+    }
+
+    .surnameSpan {
+      animation: revealUp 0.8s 0.2s ease-out forwards;
+    }
+
+    .subtitle {
+      animation: fadeIn 0.8s 0.4s ease-out forwards;
+    }
+
+    .scrollHint {
+      opacity: 1;
+    }
+  }
 }
 
 .contentContainer {
@@ -34,9 +68,9 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 15px;
-  // Убираем анимацию с контейнера
-  // animation: fadeInSlideUp 0.5s 0.2s ease-out backwards;
-  // z-index: 1; // Больше не нужно, т.к. нет фигур на фоне
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .title {
@@ -48,9 +82,12 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+}
 
-  // Возвращаем градиент
-  color: transparent;
+.nameSpan,
+.surnameSpan {
+  display: block;
+  opacity: 0;
   background: linear-gradient(
     90deg,
     #8a2be2,
@@ -60,32 +97,18 @@
     #8a2be2
   );
   background-size: 250% auto;
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #8a2be2;
   animation: gradientShift 8s linear infinite;
+}
 
-  // Стили для оберток имени и фамилии
-  .nameSpan,
-  .surnameSpan {
-    display: block;
-    // Анимации появления нет
-  }
-
-  .nameSpan {
-    // Задержки нет
-  }
-
-  .surnameSpan {
-    // Задержки нет
-    // Стили для расположения
-    align-self: stretch;
-    text-align: left;
-    letter-spacing: 6px;
-    padding-right: -6px;
-    margin-top: -10px;
-  }
-
-  // Убедимся, что стилей для .letter нет
+.surnameSpan {
+  align-self: stretch;
+  text-align: left;
+  letter-spacing: 6px;
+  margin-top: -10px;
 }
 
 .subtitle {
@@ -93,9 +116,9 @@
   color: #aaa;
   margin: 0;
   font-family: var(--font-geist-mono);
-  // Анимации появления нет
   max-width: 100%;
   text-align: left;
+  opacity: 0;
 }
 
 .scrollHint {
@@ -107,6 +130,8 @@
   font-family: var(--font-geist-mono);
   font-size: 0.9rem;
   animation: bounce 2s infinite;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.8s;
 }
 
 @keyframes bounce {
@@ -126,31 +151,29 @@
 }
 
 @media (max-width: 768px) {
-  .hero {
-    // Центрирование остается
-  }
   .contentContainer {
     align-items: center;
     max-width: 90%;
   }
+
   .title {
     font-size: 3rem;
     align-items: center;
-    // Сбрасываем специфичные стили для градиента, если нужно другое поведение на мобильных,
-    // но пока оставим градиент и там.
-    .surnameSpan {
-      // Стили для мобильных остаются
-      align-self: auto;
-      text-align: center;
-      letter-spacing: normal;
-      padding-right: 0;
-      margin-top: 0;
-    }
   }
+
+  .surnameSpan {
+    align-self: auto;
+    text-align: center;
+    letter-spacing: normal;
+    padding-right: 0;
+    margin-top: 0;
+  }
+
   .subtitle {
     font-size: 1.2rem;
     text-align: center;
   }
+
   .scrollHint {
     left: 50%;
     transform: translateX(-50%);
