@@ -18,7 +18,7 @@ const aboutSections = [
     id: "bio",
     title: "Biography",
     icon: <FaUser />,
-    content: `I started getting acquainted with development in early childhood at the age of 7, when I first tried to write layout on CodePen. A few years later, I remembered my hobbies and started learning again. At first, only layout, then full-fledged web development and AI, and now I am trying myself in more and more new areas, including game development. Also, in the last year I have been actively participating in hackathons, and even became a winner in 8 App Izazov in Podgorica`,
+    content: `I started getting acquainted with development in early childhood at the age of 7, when I first tried to write layout on CodePen. A few years later, I remembered my hobbies and started learning again. At first, only layout, then full-fledged web developmentI, and now I am trying myself in more and more new areas, including game development and AI. Also, in the last year I have been actively participating in hackathons, and even became a winner in 8 App Izazov in Podgorica`,
   },
   {
     id: "education",

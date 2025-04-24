@@ -12,7 +12,7 @@ const projects = [
     description:
       "A hackathon project using AI to create custom assistants from uploaded documentation. Worked on the main interface, assistant system, and subscription logic.",
     achievement: "⚙️ Built with Next.js, deployed as a fully functional MVP.",
-    skills: ["Next.js", "TypeScript", "AI", "Supabase", "Tailwind"],
+    skills: ["Next.js", "AI", "Supabase", "Tailwind"],
     liveUrl: "https://doctalkie-next.vercel.app/",
   },
   {
@@ -38,6 +38,9 @@ const projects = [
 const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [direction, setDirection] = useState<"next" | "prev" | null>(null);
+  const [currentProjectData, setCurrentProjectData] = useState(projects[0]);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -61,51 +64,88 @@ const Projects = () => {
     };
   }, []);
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? projects.length - 1 : prevIndex - 1
-    );
+  useEffect(() => {
+    if (isTransitioning) {
+      const timer = setTimeout(() => {
+        setCurrentProjectData(projects[currentIndex]);
+      }, 300);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isTransitioning, currentIndex]);
+
+  const handleTransition = (dir: "next" | "prev") => {
+    if (isTransitioning) return;
+
+    setIsTransitioning(true);
+    setDirection(dir);
+
+    setTimeout(() => {
+      if (dir === "next") {
+        setCurrentIndex((prevIndex) =>
+          prevIndex === projects.length - 1 ? 0 : prevIndex + 1
+        );
+      } else {
+        setCurrentIndex((prevIndex) =>
+          prevIndex === 0 ? projects.length - 1 : prevIndex - 1
+        );
+      }
+
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setDirection(null);
+      }, 600);
+    }, 300);
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === projects.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const currentProject = projects[currentIndex];
+  const handlePrev = () => handleTransition("prev");
+  const handleNext = () => handleTransition("next");
 
   return (
     <section
       id="projects"
       className={`section ${styles.projects} ${
         isVisible ? styles.visible : ""
+      } ${isTransitioning ? styles.transitioning : ""} ${
+        direction ? styles[`slide-${direction}`] : ""
       }`}
       ref={containerRef}
     >
       <div className={styles.projectDisplay}>
         <div className={styles.infoColumn}>
-          <h3 data-number={`0${currentIndex + 1}`}>{currentProject.title}</h3>
+          <h3 data-number={`0${currentIndex + 1}`}>
+            {currentProjectData.title}
+          </h3>
 
           <div className={styles.projectDescription}>
-            <p>{currentProject.description}</p>
+            <p>{currentProjectData.description}</p>
           </div>
 
           <div className={styles.skills}>
             <strong>Technologies</strong>
             <ul>
-              {currentProject.skills.map((skill, index) => (
+              {currentProjectData.skills.map((skill, index) => (
                 <li key={index}>{skill}</li>
               ))}
             </ul>
           </div>
 
           <div className={styles.navigation}>
-            <button onClick={handlePrev} aria-label="Previous project">
+            <button
+              onClick={handlePrev}
+              aria-label="Previous project"
+              disabled={isTransitioning}
+              className={isTransitioning ? styles.disabled : ""}
+            >
               <FaArrowLeft />
             </button>
             <span>{`${currentIndex + 1} / ${projects.length}`}</span>
-            <button onClick={handleNext} aria-label="Next project">
+            <button
+              onClick={handleNext}
+              aria-label="Next project"
+              disabled={isTransitioning}
+              className={isTransitioning ? styles.disabled : ""}
+            >
               <FaArrowRight />
             </button>
           </div>
@@ -114,11 +154,12 @@ const Projects = () => {
         <div className={styles.previewColumn}>
           <div className={styles.laptopPreview}>
             <div className={styles.laptopScreen}>
-              {currentProject.liveUrl && currentProject.liveUrl !== "" ? (
+              {currentProjectData.liveUrl &&
+              currentProjectData.liveUrl !== "" ? (
                 <iframe
-                  key={`laptop-${currentProject.id}`}
-                  src={currentProject.liveUrl}
-                  title={`${currentProject.title} - Laptop Preview`}
+                  key={`laptop-${currentProjectData.id}`}
+                  src={currentProjectData.liveUrl}
+                  title={`${currentProjectData.title} - Laptop Preview`}
                   loading="lazy"
                   scrolling="no"
                   sandbox="allow-scripts allow-same-origin allow-forms"
@@ -132,7 +173,7 @@ const Projects = () => {
                         </style>
                       </head>
                       <body>
-                        <iframe src="${currentProject.liveUrl}" width="1440" height="900" 
+                        <iframe src="${currentProjectData.liveUrl}" width="1440" height="900" 
                           frameBorder="0" style="transform: scale(1); transform-origin: 0 0;"
                           sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
                       </body>
@@ -146,9 +187,9 @@ const Projects = () => {
               )}
             </div>
           </div>
-          {currentProject.liveUrl && currentProject.liveUrl !== "" ? (
+          {currentProjectData.liveUrl && currentProjectData.liveUrl !== "" ? (
             <a
-              href={currentProject.liveUrl}
+              href={currentProjectData.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.projectButton}
@@ -166,10 +207,10 @@ const Projects = () => {
           )}
           <div className={styles.phoneContainer}>
             <Phone3D
-              key={`phone3d-${currentProject.id}`}
-              liveUrl={currentProject.liveUrl}
-              projectId={currentProject.id}
-              projectTitle={currentProject.title}
+              key={`phone3d-${currentProjectData.id}`}
+              liveUrl={currentProjectData.liveUrl}
+              projectId={currentProjectData.id}
+              projectTitle={currentProjectData.title}
             />
           </div>
         </div>

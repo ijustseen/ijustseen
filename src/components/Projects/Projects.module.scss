@@ -34,6 +34,106 @@
     }
   }
 
+  &.transitioning {
+    .infoColumn {
+      h3,
+      .projectDescription,
+      .skills {
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      h3 {
+        transition-delay: 0s;
+      }
+
+      .projectDescription {
+        transition-delay: 0.05s;
+      }
+
+      .skills {
+        transition-delay: 0.1s;
+      }
+    }
+
+    .previewColumn {
+      .laptopScreen {
+        transition: transform 0.3s ease;
+        filter: brightness(0.8) blur(1px);
+      }
+
+      .phoneContainer {
+        transition: transform 0.3s ease;
+        filter: brightness(0.8) blur(1px);
+      }
+
+      .projectButton {
+        opacity: 0.7;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+    }
+  }
+
+  &.slide-next {
+    .infoColumn {
+      h3 {
+        transform: translateX(-30px);
+      }
+
+      .projectDescription {
+        transform: translateX(-25px);
+      }
+
+      .skills {
+        transform: translateX(-20px);
+      }
+    }
+
+    .previewColumn {
+      .laptopPreview {
+        transform: perspective(800px) rotateX(5deg) translateX(-15px);
+      }
+
+      .projectButton {
+        transform: translateY(0) translateX(-10px);
+      }
+
+      .phoneContainer {
+        transform: rotate(5deg) translateX(-20px);
+      }
+    }
+  }
+
+  &.slide-prev {
+    .infoColumn {
+      h3 {
+        transform: translateX(30px);
+      }
+
+      .projectDescription {
+        transform: translateX(25px);
+      }
+
+      .skills {
+        transform: translateX(20px);
+      }
+    }
+
+    .previewColumn {
+      .laptopPreview {
+        transform: perspective(800px) rotateX(5deg) translateX(15px);
+      }
+
+      .projectButton {
+        transform: translateY(0) translateX(10px);
+      }
+
+      .phoneContainer {
+        transform: rotate(5deg) translateX(20px);
+      }
+    }
+  }
+
   h2 {
     font-size: 2.5rem;
     margin-bottom: 40px; // Увеличим отступ снизу
@@ -45,7 +145,7 @@
 .projectDisplay {
   display: flex;
   gap: 20px; // Уменьшено до 20px
-  align-items: flex-start;
+  align-items: stretch; // Изменено с flex-start на stretch для выравнивания высоты
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
@@ -59,6 +159,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 350px; // Добавляем минимальную ширину
   // Создаем совершенно новый стиль
   padding: 30px; // Добавляем паддинг для всей колонки
   border-radius: 20px;
@@ -67,7 +168,7 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); // Добавляем тень для выделения
   border: 1px solid rgba(255, 255, 255, 0.08); // Тонкая обводка
   position: relative;
-  height: 100%;
+  height: 450px; // Устанавливаем фиксированную высоту
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
@@ -84,6 +185,8 @@
     margin-bottom: 25px;
     padding-left: 15px;
     position: relative;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: 0.3s;
 
     // Добавляем акцентный блок слева
     &::before {
@@ -119,6 +222,11 @@
     border-radius: 0; // Убираем скругление
     margin-bottom: 25px;
     box-shadow: none; // Убираем тень
+    flex: 1; // Делаем этот блок растягиваемым
+    overflow-y: auto; // Добавляем прокрутку, если текст не помещается
+    max-height: 220px; // Ограничиваем максимальную высоту
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: 0.4s;
 
     p {
       font-size: 1rem;
@@ -138,6 +246,8 @@
   // Контейнер для блока навыков
   .skills {
     margin: 0 0 20px 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: 0.5s;
 
     // Заголовок блока навыков
     strong {
@@ -253,6 +363,24 @@
       &:active {
         transform: translateY(0);
       }
+
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: translateY(0);
+        pointer-events: none;
+
+        &:hover {
+          background: rgba(var(--accent-purple-rgb), 0.2);
+          color: var(--accent-purple);
+          transform: translateY(0);
+          box-shadow: 0 4px 12px rgba(var(--accent-purple-rgb), 0.15);
+
+          &::before {
+            opacity: 0;
+          }
+        }
+      }
     }
   }
 }
@@ -265,7 +393,9 @@
   justify-content: flex-start; // Выравниваем сверху
   gap: 20px; // Добавляем отступ между элементами
   position: relative;
-  min-height: 400px; // Увеличиваем высоту для лучшей композиции
+  min-height: 450px; // Увеличиваем высоту для соответствия infoColumn
+  min-width: 540px; // Устанавливаем минимальную ширину
+  height: 450px; // Фиксированная высота
   padding-bottom: 20px;
   overflow: visible;
   margin-left: -30px;
@@ -300,6 +430,8 @@
   transform: perspective(800px) rotateX(10deg); // Добавляем небольшой наклон для 3D-эффекта
   opacity: 0;
   transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
+  transform-origin: center center; // Фиксируем точку трансформации
+  will-change: transform, opacity; // Оптимизация производительности
 
   &::after {
     content: "";
@@ -344,6 +476,7 @@
   transform: translateY(20px);
   transition: opacity 0.6s ease 0.7s, transform 0.6s ease 0.7s,
     background-color 0.25s, box-shadow 0.25s;
+  will-change: transform, opacity; // Оптимизация производительности
 
   // Стиль для текста внутри кнопки
   span {
@@ -383,7 +516,9 @@
   overflow: visible;
   transform: perspective(800px) rotate(5deg) rotateX(5deg); // Добавляем перспективу
   opacity: 0;
-  transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s;
+  transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s, filter 0.5s ease;
+  transform-origin: center center;
+  will-change: transform, opacity, filter;
 
   canvas {
     display: block;
@@ -426,6 +561,8 @@
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
   position: relative;
   overflow: hidden;
+  transition: filter 0.5s ease;
+  will-change: filter;
 
   iframe {
     width: 1440px; // Устанавливаем фиксированную большую ширину
@@ -456,10 +593,27 @@
 
 // Обновляем адаптивные стили
 @media (max-width: 992px) {
+  .projectDisplay {
+    flex-direction: column; // Меняем на вертикальное расположение
+    align-items: center; // Центрируем колонки
+  }
+
+  .infoColumn,
+  .previewColumn {
+    min-width: unset; // Сбрасываем минимальную ширину
+    min-height: unset; // Сбрасываем минимальную высоту
+    width: 100%; // Занимают всю ширину
+    height: auto; // Высота по содержимому
+  }
+
   .previewColumn {
     margin-left: 0;
     align-items: center;
     min-height: auto;
+  }
+
+  .projectDescription {
+    max-height: none; // Убираем ограничение высоты
   }
 
   .laptopPreview {

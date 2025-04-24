@@ -1,61 +1,85 @@
-# Andrew Eroshenkov
+# Andrew Eroshenkov Portfolio
 
-**Junior Full-Stack Web Developer — Open to Remote Work**  
-📍 Novi Sad, Serbia  
-📧 anordgame@gmail.com  
-🔗 [GitHub](https://github.com/ijustseen) • [LinkedIn](https://www.linkedin.com/in/andrew-eroshenkov-27235a30b/)
+## Team Name - Andrew Eroshenkov
 
----
+## Members: Andrew Eroshenkov (Frontend Developer, 17 years old, studying in Gymnasium Jovan Jovanovic Znaj)
 
-## 🧑‍💻 About Me
+## Description of the portfolio
 
-I'm a self-motivated junior full-stack developer with a strong passion for web technologies and clean UI.  
-I thrive in small, agile teams, and love transforming ideas into real, working products.  
-With a user-focused mindset and a minimalist approach to design, I bring both creativity and structure to my code.
+Welcome to my developer portfolio! I'm Andrew Eroshenkov, a 17-year-old frontend developer currently studying at Gymnasium Jovan Jovanovic Znaj. This portfolio showcases my skills, projects, and passion for building modern web applications.
 
----
+Key Features:
 
-## ⚙️ Tech Stack
+- Interactive Skills Section: Explore my technical expertise with detailed skill cards and categories
+- Project Showcase: Discover my completed projects with live demos and technical details
+- Modern UI/UX: Enjoy smooth animations and responsive design
+- Contact Options: Multiple ways to connect and collaborate
 
-- **Frontend**: React, Next.js, Tailwind CSS, SCSS, Expo React Native
-- **Backend**: REST API, Token-based authentication
-- **Tools**: Git, GitHub, Vercel, VS Code
-- **Other**: AI hackathon experience, App architecture, Chat/Call systems
+Technologies Used:
 
----
+- Next.js for server-side rendering and routing
+- TypeScript for type-safe development
+- Tailwind CSS for utility-first styling
+- Framer Motion for animations
+- React Icons for beautiful vector icons
 
-## 🚀 Projects
+This portfolio is not just a showcase of my work, but also a reflection of my dedication to clean code, user experience, and continuous learning. I'm always excited to take on new challenges and collaborate on innovative projects!
 
-### Learn&Share
+## Tools and technologies used
 
-A mobile app that connects people who want to teach and learn various skills through video call lessons.  
-Built authentication, profiles, reviews, and teacher discovery features.  
-🏆 Winner of the MTS App Challenge (Serbia)
+### Core Technologies:
 
-### DocTalkie
+- **Next.js**: Framework for server-side rendering and routing
+- **TypeScript**: For type-safe development
+- **Framer Motion**: Animation library for smooth transitions
+- **React Icons**: Comprehensive icon library
 
-Hackathon project that uses AI to create custom assistants from uploaded documentation.  
-Worked on the core interface, assistant system, and subscription logic.  
-⚙️ Built with Next.js, deployed as a full MVP.
+### Development Tools:
 
----
+- **VSCode**: Primary code editor
+- **Git & GitHub**: Version control and collaboration
+- **ESLint & Prettier**: Code linting and formatting
+- **npm**: Package management
 
-## 🏆 Achievements
+### Additional Libraries:
 
-- 🥇 **Winner**, MTS App Challenge (Serbia)
-- 🎯 **Finalist**, AI Hackathon (5000+ participants)
-- 🚀 Launched multiple full-stack MVPs as part of a small development team
+- **React Hook Form**: Form management
+- **React Intersection Observer**: Scroll animations
+- **React Spring**: Advanced animations
+- **Sass**: CSS preprocessor for complex styles
 
----
+### Deployment:
 
-## 💡 Key Strengths
+- **Vercel**: Hosting and continuous deployment
+- **GitHub Actions**: CI/CD pipeline
 
-- Ownership mindset & team player
-- Clean design and UX-first thinking
-- Quick learner & tech enthusiast
-- Structured, goal-oriented, and proactive
-- Strong communication skills
+## Basic Setup Instructions
 
----
+1. **Clone the repository**
 
-_Always open to meaningful collaborations, innovative ideas, and great teams._
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   ```
+
+2. **Navigate to the project directory**
+
+   ```bash
+   cd your-repo
+   ```
+
+3. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+4. **Run the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Open in your browser**  
+   Visit `http://localhost:3000` to view the portfolio
+
+Note: Make sure you have Node.js (v18 or higher) installed on your system.
