@@ -118,8 +118,8 @@ const Contact = () => {
       id: "telegram",
       icon: <FaTelegram />,
       title: "Telegram",
-      link: "https://t.me/ijustseen",
-      text: "ijustseen",
+      link: "https://t.me/andr_ewt",
+      text: "andr_ewt",
       tags: ["Fast Response", "Direct Contact"],
     },
     {

@@ -60,12 +60,13 @@
   display: flex;
   flex-direction: column;
   // Создаем совершенно новый стиль
-  padding: 0; // Убираем паддинг, будем использовать внутренние элементы
+  padding: 30px; // Добавляем паддинг для всей колонки
   border-radius: 20px;
-  background: none; // Убираем фон самой колонки
+  background: rgba(15, 15, 15, 0.85); // Добавляем более четкий фон
+  backdrop-filter: blur(15px); // Усиливаем эффект blur
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); // Добавляем тень для выделения
+  border: 1px solid rgba(255, 255, 255, 0.08); // Тонкая обводка
   position: relative;
-  // Убираем тени, они будут у внутренних элементов
-  border: none;
   height: 100%;
   opacity: 0;
   transform: translateY(40px);
@@ -112,19 +113,19 @@
 
   // Контейнер описания
   .projectDescription {
-    background: rgba(15, 15, 15, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 25px;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background: transparent; // Убираем фон
+    backdrop-filter: none; // Убираем эффект размытия
+    border: none; // Убираем границу
+    border-radius: 0; // Убираем скругление
+    margin-bottom: 25px;
+    box-shadow: none; // Убираем тень
 
     p {
       font-size: 1rem;
       line-height: 1.7;
       color: rgba(255, 255, 255, 0.85);
       margin: 0;
+      text-align: left; // Выравнивание текста по левому краю
 
       // Убираем стилизацию первой буквы, т.к. не вписывается в общий стиль
       &::first-letter {
@@ -151,6 +152,7 @@
 
     ul {
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 8px;
       margin: 0;
@@ -183,44 +185,69 @@
     gap: 12px;
     margin-top: auto; // Прижимаем к низу
     padding: 20px 15px; // Добавляем отступы
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 
     // Счетчик в центре
     span {
       margin: 0 auto; // Центрируем
       font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.6);
-      font-weight: 400;
+      color: rgba(255, 255, 255, 0.7); // Делаем заметнее
+      font-weight: 500; // Более жирный шрифт
       padding: 4px 8px;
       min-width: 50px;
       text-align: center;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.1); // Более заметный фон
       border-radius: 4px;
     }
 
     // Кнопки навигации
     button {
-      background: rgba(var(--accent-purple-rgb), 0.1);
-      border: 1px solid rgba(var(--accent-purple-rgb), 0.15);
+      background: rgba(var(--accent-purple-rgb), 0.2); // Более яркий фон
+      border: 1px solid rgba(var(--accent-purple-rgb), 0.3); // Более заметная обводка
       color: var(--accent-purple);
-      width: 42px;
-      height: 42px;
+      width: 48px; // Увеличиваем размер кнопок
+      height: 48px; // Увеличиваем размер кнопок
       border-radius: 12px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(var(--accent-purple-rgb), 0.15); // Добавляем тень
+
+      // Добавляем эффект свечения
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+          circle at center,
+          rgba(var(--accent-purple-rgb), 0.2) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
 
       svg {
-        font-size: 1rem;
+        font-size: 1.2rem; // Увеличиваем иконки
+        position: relative; // Для правильного отображения над эффектом
       }
 
       &:hover {
         background: var(--accent-purple);
         color: #fff;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(var(--accent-purple-rgb), 0.3);
+        box-shadow: 0 6px 15px rgba(var(--accent-purple-rgb), 0.4);
+
+        &::before {
+          opacity: 1;
+        }
       }
 
       &:active {
@@ -347,14 +374,14 @@
 
 .phoneContainer {
   position: absolute;
-  bottom: -50px; // Смещаем ниже
-  right: 60px; // Смещаем больше вправо
+  bottom: -60px; // Смещаем ниже
+  right: 50px; // Смещаем правее
   z-index: 2;
-  width: 180px; // Уменьшаем размер (было 220px)
-  height: 320px; // Уменьшаем размер (было 380px)
-  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+  width: 210px; // Увеличиваем размер
+  height: 360px; // Увеличиваем размер
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.4)); // Усиливаем тень
   overflow: visible;
-  transform: rotate(10deg); // Небольшой наклон для динамичности
+  transform: perspective(800px) rotate(5deg) rotateX(5deg); // Добавляем перспективу
   opacity: 0;
   transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s;
 
@@ -364,6 +391,7 @@
     height: 100%;
     cursor: grab;
     overflow: visible;
+    border-radius: 12px;
 
     &:active {
       cursor: grabbing;

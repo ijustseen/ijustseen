@@ -24,6 +24,15 @@ const projects = [
     skills: ["React Native", "Firebase", "Node.js"],
     liveUrl: "",
   },
+  {
+    id: "tondash",
+    title: "TonDash",
+    description:
+      "Mobile application that connects people who want to teach and learn various skills through video lessons. Implemented authentication, profiles, reviews, and teacher search.",
+    achievement: "🏆 Winner of MTS App Challenge (Serbia)",
+    skills: ["React Native", "Firebase", "Node.js"],
+    liveUrl: "https://tondash-next.vercel.app/",
+  },
 ];
 
 const Projects = () => {

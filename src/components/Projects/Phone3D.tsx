@@ -4,14 +4,14 @@ import {
   OrbitControls,
   Html,
   useProgress,
+  Plane,
+  useTexture,
   RoundedBox,
   Edges,
-  Sphere,
-  Environment,
 } from "@react-three/drei";
 import * as THREE from "three";
 
-// Простой лоадер, пока грузится Html/iframe
+// Простой лоадер, пока грузится текстура
 function Loader() {
   const { progress } = useProgress();
   return (
@@ -21,212 +21,203 @@ function Loader() {
   );
 }
 
-// Добавляем интерфейс для пропсов PhoneModel
-interface PhoneModelProps {
-  liveUrl: string;
-  projectTitle: string;
-}
+// Компонент телефона со скриншотом
+const PhoneView: React.FC<{ projectId: string }> = ({ projectId }) => {
+  // Загружаем все текстуры одним вызовом useTexture
+  const textures = useTexture({
+    doctalkie: "/phone-doctalkie.jpg",
+    learnAndShare: "/phone-learn-and-share.jpg",
+    tondash: "/phone-tondash.jpg",
+  });
 
-// Компонент самой 3D модели телефона
-const PhoneModel: React.FC<PhoneModelProps> = ({ liveUrl, projectTitle }) => {
-  // Размеры телефона (соответствуют пропорциям width: 160, height: 280 из CSS)
-  const phoneWidth = 1.6;
-  const phoneHeight = 2.8;
-  const phoneDepth = 0.15; // Толщина телефона
+  // Выбираем текстуру на основе projectId
+  let texture;
+  // Добавляем console.log для отладки
+  console.log("Current projectId:", projectId);
 
-  // Размеры экрана (чуть меньше корпуса)
-  const screenWidth = phoneWidth * 0.9;
-  const screenHeight = phoneHeight * 0.92;
+  if (
+    projectId === "learn&share" ||
+    projectId === "learnshare" ||
+    projectId === "learn-and-share"
+  ) {
+    texture = textures.learnAndShare;
+  } else if (projectId === "doctalkie") {
+    texture = textures.doctalkie;
+  } else if (projectId === "tondash") {
+    texture = textures.tondash;
+  } else {
+    // Для других проектов выводим заглушку
+    return (
+      <group>
+        {/* Корпус телефона */}
+        <Edges scale={1} threshold={15} color="rgba(120, 120, 120, 0.8)">
+          <RoundedBox args={[2.0, 3.5, 0.1]} radius={0.1} smoothness={4}>
+            <meshPhysicalMaterial
+              color="#111111"
+              roughness={0.05}
+              metalness={0.9}
+              reflectivity={1.0}
+              clearcoat={0.6}
+              clearcoatRoughness={0.05}
+            />
+          </RoundedBox>
+        </Edges>
+
+        {/* Экран-заглушка */}
+        <RoundedBox
+          args={[1.85, 3.3, 0.01]}
+          radius={0.09}
+          position={[0, 0, 0.06]}
+        >
+          <meshBasicMaterial color="#0f0f0f" />
+        </RoundedBox>
+
+        {/* Текст "In development" */}
+        <Html
+          transform
+          occlude
+          position={[0, 0, 0.07]}
+          style={{
+            width: "180px",
+            height: "300px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            pointerEvents: "none",
+          }}
+        >
+          <div
+            style={{
+              color: "#444",
+              fontSize: "14px",
+              fontFamily: "monospace",
+              textAlign: "center",
+            }}
+          >
+            In development
+          </div>
+        </Html>
+
+        {/* Имитация динамика */}
+        <RoundedBox
+          args={[0.4, 0.05, 0.01]}
+          radius={0.02}
+          position={[0, 1.6, 0.06]}
+        >
+          <meshBasicMaterial color="#222" />
+        </RoundedBox>
+      </group>
+    );
+  }
 
   return (
-    <>
-      {/* Основной корпус телефона */}
-      <Edges scale={1} threshold={15} color="#777">
-        <RoundedBox
-          args={[phoneWidth, phoneHeight, phoneDepth]}
-          radius={0.05}
-          smoothness={4}
-        >
-          {/* Меняем цвет и параметры для более современного вида */}
+    <group>
+      {/* Корпус телефона */}
+      <Edges scale={1} threshold={15} color="rgba(120, 120, 120, 0.8)">
+        <RoundedBox args={[2.0, 3.5, 0.1]} radius={0.1} smoothness={4}>
           <meshPhysicalMaterial
-            color="#202020" // Темно-серый, почти черный
-            roughness={0.08} // Очень гладкий
-            metalness={0.8} // Очень металлический
-            reflectivity={0.8} // Хорошо отражает
-            clearcoat={0.5} // Слой глянца
-            clearcoatRoughness={0.1}
+            color="#111111"
+            roughness={0.05}
+            metalness={0.9}
+            reflectivity={1.0}
+            clearcoat={0.6}
+            clearcoatRoughness={0.05}
           />
         </RoundedBox>
       </Edges>
 
-      {/* Добавляем "камеру" телефона */}
-      <Sphere
-        args={[0.05, 16, 16]} // Маленький шар
-        position={[0, phoneHeight / 2.2, phoneDepth / 2 + 0.01]} // Вверху телефона
-      >
-        <meshPhysicalMaterial color="#111" roughness={0.2} metalness={0.8} />
-      </Sphere>
-
-      {/* Кнопки сбоку */}
+      {/* Экран */}
       <RoundedBox
-        args={[0.03, 0.15, 0.02]} // Узкая и длинная кнопка
-        radius={0.005} // Совсем небольшое скругление
-        position={[phoneWidth / 2 + 0.01, phoneHeight / 4, 0]} // На правой стороне
+        args={[1.85, 3.3, 0.01]}
+        radius={0.09}
+        position={[0, 0, 0.06]}
       >
-        <meshStandardMaterial color="#333" />
+        <meshBasicMaterial color="#000000" />
       </RoundedBox>
 
-      <RoundedBox
-        args={[0.03, 0.15, 0.02]}
-        radius={0.005}
-        position={[phoneWidth / 2 + 0.01, 0, 0]} // Еще одна кнопка, ниже
-      >
-        <meshStandardMaterial color="#333" />
-      </RoundedBox>
+      {/* Скриншот */}
+      <Plane args={[1.75, 3.2]} position={[0, 0, 0.07]}>
+        <meshBasicMaterial map={texture} toneMapped={false} />
+      </Plane>
 
-      {/* Экран телефона (Html компонент с iframe) */}
-      <Suspense fallback={<Loader />}>
-        <Html
-          transform
-          occlude
-          position={[0, 0, phoneDepth / 2 + 0.01]}
-          distanceFactor={10}
-          style={{
-            width: `${screenWidth * 100}px`, // Используем пиксели для Html
-            height: `${screenHeight * 100}px`, // *100 т.к. размеры геометрии в условных единицах
-            backgroundColor: "#000", // Фон под iframe
-            overflow: "hidden", // Обрезаем контент
-            borderRadius: "15px", // Скругление экрана
-            pointerEvents: "none", // Отключаем взаимодействие с iframe напрямую через 3D
-            boxShadow: "inset 0 0 8px rgba(0,0,0,0.5)",
-          }}
-        >
-          {liveUrl && liveUrl !== "" ? (
-            <iframe
-              src={liveUrl}
-              title={`${projectTitle} - 3D Phone Preview`}
-              style={{
-                width: "100%",
-                height: "100%",
-                border: "none",
-                display: "block",
-                borderRadius: "15px",
-              }}
-              srcDoc={`
-                <html>
-                  <head>
-                    <meta name="viewport" content="width=375, initial-scale=1, maximum-scale=1, user-scalable=no" />
-                    <style>
-                      body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-                      iframe { width: 100%; height: 100%; border: none; }
-                    </style>
-                  </head>
-                  <body>
-                    <iframe src="${liveUrl}" width="375" height="667" 
-                      frameBorder="0" style="transform: scale(1); transform-origin: 0 0;"
-                      sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
-                  </body>
-                </html>
-              `}
-            />
-          ) : (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#0f0f0f",
-                color: "#444",
-                fontSize: "12px",
-                fontFamily: "monospace",
-                textAlign: "center",
-                padding: "10px",
-                borderRadius: "15px",
-              }}
-            >
-              In development
-            </div>
-          )}
-        </Html>
-      </Suspense>
-    </>
+      {/* Имитация динамика */}
+      <RoundedBox
+        args={[0.4, 0.05, 0.01]}
+        radius={0.02}
+        position={[0, 1.6, 0.06]}
+      >
+        <meshBasicMaterial color="#222" />
+      </RoundedBox>
+    </group>
   );
 };
 
-// Новый компонент для анимации и рендера модели
-const AnimatedPhone: React.FC<PhoneModelProps> = ({
-  liveUrl,
-  projectTitle,
-}) => {
-  // Ref для группы и useFrame теперь здесь, внутри Canvas
+// Компонент для анимации
+const AnimatedPhone: React.FC<{ projectId: string }> = ({ projectId }) => {
+  // Ref для группы и useFrame для анимации
   const groupRef = useRef<THREE.Group>(null!);
 
   useFrame((state) => {
     if (groupRef.current) {
       const time = state.clock.elapsedTime;
-      const bobbingFrequency = 1.5;
-      const bobbingAmplitude = 0.05;
+      const bobbingFrequency = 0.8; // Медленнее для более плавного эффекта
+      const bobbingAmplitude = 0.02; // Уменьшаем амплитуду для более тонкого движения
 
       // Плавное покачивание
       groupRef.current.position.y =
-        Math.sin(time * bobbingFrequency) * bobbingAmplitude;
+        0.2 + Math.sin(time * bobbingFrequency) * bobbingAmplitude; // Добавляем базовое смещение 0.2 вверх
 
-      // Добавляем легкое вращение для более живого вида
-      groupRef.current.rotation.y = Math.sin(time * 0.5) * 0.05;
+      // Добавляем легкое вращение
+      groupRef.current.rotation.y = Math.sin(time * 0.3) * 0.05;
     }
   });
 
   return (
     // Группа для масштабирования и анимации
-    <group ref={groupRef} scale={0.6}>
-      <PhoneModel liveUrl={liveUrl} projectTitle={projectTitle} />
+    <group ref={groupRef} scale={0.85} position={[0, 0.2, 0]}>
+      <PhoneView projectId={projectId} />
     </group>
   );
 };
 
 // Основной компонент Phone3D
 interface Phone3DProps {
-  liveUrl: string;
-  projectId: string; // Для key
-  projectTitle: string;
+  liveUrl: string; // Оставляем для совместимости
+  projectId: string;
+  projectTitle: string; // Оставляем для совместимости
 }
 
-const Phone3D: React.FC<Phone3DProps> = ({
-  liveUrl,
-  projectId,
-  projectTitle,
-}) => {
+const Phone3D: React.FC<Phone3DProps> = ({ projectId, projectTitle }) => {
+  // Логируем проп для отладки
+  console.log("Phone3D received projectId:", projectId);
+  console.log("Phone3D received projectTitle:", projectTitle);
+
   return (
-    <div style={{ width: "200px", height: "350px" }}>
-      {" "}
-      {/* Задаем размер контейнера Canvas */}
+    <div style={{ width: "270px", height: "450px" }}>
       <Canvas
-        key={projectId} // Пересоздаем Canvas при смене проекта, чтобы Html обновился
-        camera={{ position: [0, 0, 5], fov: 50 }} // Настраиваем камеру
+        key={projectId}
+        camera={{ position: [0, 0, 5], fov: 45 }}
+        dpr={[1, 2]} // Улучшаем качество рендеринга на устройствах с высоким DPI
       >
-        {/* Улучшаем освещение */}
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={0.8} />
-        <directionalLight
-          position={[-5, -5, 5]}
-          intensity={0.2}
-          color="#8860e6"
-        />{" "}
-        {/* Акцентное освещение */}
-        <pointLight position={[-10, -10, -10]} intensity={0.4} />
-        {/* Добавляем окружающее освещение для реалистичных отражений */}
-        <Environment preset="city" />
-        {/* Рендерим анимированную модель через новый компонент */}
-        <AnimatedPhone liveUrl={liveUrl} projectTitle={projectTitle} />
+        {/* Базовое освещение */}
+        <ambientLight intensity={1.0} />
+        <directionalLight position={[5, 5, 5]} intensity={1.2} />
+        <directionalLight position={[-5, -5, 2]} intensity={0.3} />
+        <pointLight position={[0, 0, 3]} intensity={0.8} />
+
+        {/* Рендерим телефон */}
+        <Suspense fallback={<Loader />}>
+          <AnimatedPhone projectId={projectId} />
+        </Suspense>
+
         <OrbitControls
-          enableZoom={false} // Отключаем зум
-          enablePan={false} // Отключаем панорамирование
-          minPolarAngle={Math.PI / 3} // Ограничиваем вертикальное вращение
-          maxPolarAngle={(Math.PI * 2) / 3} // Ограничиваем вертикальное вращение
-          minAzimuthAngle={-Math.PI / 4} // Ограничиваем горизонтальное вращение (-45 град)
-          maxAzimuthAngle={Math.PI / 4} // Ограничиваем горизонтальное вращение (+45 град)
+          enableZoom={false}
+          enablePan={false}
+          minPolarAngle={Math.PI / 3}
+          maxPolarAngle={(Math.PI * 2) / 3}
+          minAzimuthAngle={-Math.PI / 3}
+          maxAzimuthAngle={Math.PI / 3}
+          rotateSpeed={0.5}
         />
       </Canvas>
     </div>
