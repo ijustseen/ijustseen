@@ -77,6 +77,17 @@
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
   gap: 1rem;
+  background: rgba(15, 15, 15, 0.6);
+  border-radius: 12px;
+  padding: 1rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  }
 }
 
 .statItem {
@@ -84,18 +95,20 @@
   flex-direction: column;
   align-items: center;
   padding: 0.5rem;
-  min-width: 120px;
+  min-width: 100px;
 
   .statValue {
     font-size: 1.8rem;
     font-weight: 700;
     color: #64ffda;
+    text-shadow: 0 0 10px rgba(100, 255, 218, 0.2);
   }
 
   .statLabel {
     font-size: 0.85rem;
     color: #a8a8a8;
     text-align: center;
+    margin-top: 0.25rem;
   }
 }
 
@@ -106,6 +119,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem 0.5rem;
+  border-radius: 8px;
 }
 
 .contributionGraph {
@@ -115,6 +130,21 @@
   padding: 0.5rem 0;
   max-width: 100%;
   justify-content: center;
+
+  /* Стилизуем скроллбар для лучшего UX */
+  &::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(100, 255, 218, 0.3);
+    border-radius: 2px;
+  }
 }
 
 .week {
@@ -128,10 +158,10 @@
   height: 10px;
   border-radius: 2px;
   cursor: pointer;
-  transition: transform 0.1s ease;
+  transition: transform 0.2s ease;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
   }
 }
 
@@ -161,6 +191,12 @@
   justify-content: center;
   margin-top: 1rem;
   gap: 0.3rem;
+  font-size: 0.75rem;
+  color: #a8a8a8;
+  background: rgba(15, 15, 15, 0.4);
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .levelLabel {
@@ -169,27 +205,37 @@
 }
 
 .levelSample {
-  width: 13px;
-  height: 13px;
+  width: 10px;
+  height: 10px;
   border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .profileLink {
   text-align: center;
   margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 
   a {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: #a8a8a8;
     text-decoration: none;
-    font-weight: 400;
     transition: color 0.2s;
 
     &:hover {
       color: #64ffda;
     }
   }
+}
+
+.mostActiveDay {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #a8a8a8;
+  text-align: center;
+  background: rgba(15, 15, 15, 0.4);
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .loading,
@@ -210,11 +256,20 @@
   }
 
   .contributionStats {
-    justify-content: space-between;
+    padding: 0.8rem 0.3rem;
   }
 
   .statItem {
-    min-width: 100px;
+    min-width: 80px;
+    padding: 0.3rem;
+  }
+
+  .statValue {
+    font-size: 1.4rem !important;
+  }
+
+  .statLabel {
+    font-size: 0.7rem !important;
   }
 
   .contributionGraph {
@@ -227,7 +282,21 @@
   }
 
   .levelSample {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
+  }
+
+  .levelIndicator {
+    padding: 0.2rem 0.5rem;
+    gap: 0.2rem;
+  }
+
+  .profileLink a {
+    font-size: 0.8rem;
+  }
+
+  .mostActiveDay {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
   }
 }

@@ -5,6 +5,7 @@ import React, { useRef, useState, useEffect } from "react";
 // Импортируем реальные компоненты
 import Hero from "@/components/Hero/Hero";
 import About from "@/components/About/About";
+import Skills from "@/components/Skills/Skills";
 import Projects from "@/components/Projects/Projects";
 import Contact from "@/components/Contact/Contact";
 import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
@@ -13,6 +14,7 @@ import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
 const sections = [
   { id: "hero", name: "Welcome" },
   { id: "about", name: "About" },
+  { id: "skills", name: "Skills" },
   { id: "projects", name: "Projects" },
   { id: "contact", name: "Contact" },
 ];
@@ -63,6 +65,7 @@ export default function Home() {
       {/* Отображаем реальные компоненты */}
       <Hero />
       <About />
+      <Skills />
       <Projects />
       <Contact />
       {/* Передаем данные в индикатор */}

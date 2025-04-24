@@ -2,21 +2,57 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./About.module.scss";
-import { FaReact, FaNodeJs, FaCode, FaGithub, FaServer } from "react-icons/fa";
-import {
-  SiNextdotjs,
-  SiTypescript,
-  SiJavascript,
-  SiTailwindcss,
-  SiGraphql,
-} from "react-icons/si";
 import GitHubActivity from "../GitHub/GitHubActivity";
+import Image from "next/image";
+import {
+  FaUser,
+  FaGraduationCap,
+  FaLightbulb,
+  FaQuoteRight,
+  FaGithub,
+} from "react-icons/fa";
+
+// Данные для подразделов About
+const aboutSections = [
+  {
+    id: "bio",
+    title: "Biography",
+    icon: <FaUser />,
+    content: `I am a dedicated and passionate junior full-stack developer with a
+    strong enthusiasm for web technologies, clean UI, and creating
+    impactful digital experiences. I thrive in collaborative, agile
+    environments and enjoy transforming complex ideas into functional,
+    user-friendly products.`,
+  },
+  {
+    id: "education",
+    title: "Education",
+    icon: <FaGraduationCap />,
+    content: `Computer Science degree with focus on Web Development and Software Engineering.
+    Completed specialization courses in modern JavaScript frameworks and cloud technologies.`,
+  },
+  {
+    id: "interests",
+    title: "Interests",
+    icon: <FaLightbulb />,
+    content: `Beyond coding, I'm passionate about UI/UX design, keeping up with tech trends, 
+    and exploring new frameworks. I enjoy contributing to open-source projects and attending tech meetups.`,
+  },
+  {
+    id: "philosophy",
+    title: "My Philosophy",
+    icon: <FaQuoteRight />,
+    content: `With a user-centric mindset and a keen eye for detail, I strive to
+    write clean, maintainable, and efficient code. I'm always
+    eager to learn new technologies and improve my skills.`,
+  },
+];
 
 const About = () => {
-  const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [techElements, setTechElements] = useState<React.ReactNode[]>([]);
+  const [activeTab, setActiveTab] = useState("bio");
   // Ваше имя пользователя GitHub
   const githubUsername = "ijustseen";
 
@@ -63,30 +99,6 @@ const About = () => {
     setTechElements(elements);
   }, []);
 
-  // Определяем навыки с иконками для лучшей визуализации
-  const skillsList = [
-    { name: "React", icon: <FaReact />, category: "frontend" },
-    { name: "Next.js", icon: <SiNextdotjs />, category: "frontend" },
-    { name: "TypeScript", icon: <SiTypescript />, category: "language" },
-    { name: "JavaScript (ES6+)", icon: <SiJavascript />, category: "language" },
-    { name: "HTML5", icon: <FaCode />, category: "frontend" },
-    { name: "CSS3", icon: <FaCode />, category: "frontend" },
-    { name: "SCSS", icon: <FaCode />, category: "frontend" },
-    { name: "Tailwind CSS", icon: <SiTailwindcss />, category: "frontend" },
-    { name: "Expo React Native", icon: <FaReact />, category: "mobile" },
-    { name: "Node.js", icon: <FaNodeJs />, category: "backend" },
-    { name: "REST API", icon: <FaServer />, category: "backend" },
-    { name: "GraphQL (Basic)", icon: <SiGraphql />, category: "backend" },
-    { name: "Token-based auth", icon: <FaServer />, category: "security" },
-    { name: "Git", icon: <FaCode />, category: "tools" },
-    { name: "GitHub", icon: <FaGithub />, category: "tools" },
-    { name: "VS Code", icon: <FaCode />, category: "tools" },
-    { name: "App architecture", icon: <FaServer />, category: "concept" },
-    { name: "UI/UX Principles", icon: <FaCode />, category: "concept" },
-    { name: "Agile Methodologies", icon: <FaCode />, category: "concept" },
-    { name: "Problem Solving", icon: <FaCode />, category: "concept" },
-  ];
-
   return (
     <section
       id="about"
@@ -95,57 +107,86 @@ const About = () => {
       <div className={styles.techBackground}>{techElements}</div>
 
       <div className={styles.container} ref={containerRef}>
-        <div className={styles.aboutMe}>
-          <div className={styles.glowingHeading}>
-            <h2>About Me</h2>
-          </div>
-          <div className={styles.contentBox}>
-            <p>
-              I am a dedicated and passionate junior full-stack developer with a
-              strong enthusiasm for web technologies, clean UI, and creating
-              impactful digital experiences. I thrive in collaborative, agile
-              environments and enjoy transforming complex ideas into functional,
-              user-friendly products.
-            </p>
-            <p>
-              With a user-centric mindset and a keen eye for detail, I strive to
-              write clean, maintainable, and efficient code. I&apos;m always
-              eager to learn new technologies and improve my skills.
-            </p>
+        <div className={styles.aboutContent}>
+          <div className={styles.aboutText}>
+            <div className={styles.tabsContainer}>
+              {aboutSections.map((section) => (
+                <button
+                  key={section.id}
+                  className={`${styles.tabButton} ${
+                    activeTab === section.id ? styles.activeTab : ""
+                  }`}
+                  onClick={() => setActiveTab(section.id)}
+                >
+                  <span className={styles.tabIcon}>{section.icon}</span>
+                  {section.title}
+                </button>
+              ))}
+            </div>
 
-            {/* GitHub активность вместо блока кода */}
+            <div className={styles.contentBox}>
+              {aboutSections.map((section) => (
+                <div
+                  key={section.id}
+                  className={`${styles.tabPanel} ${
+                    activeTab === section.id ? styles.activePanel : ""
+                  }`}
+                >
+                  <h3>
+                    <span className={styles.sectionIcon}>{section.icon}</span>
+                    {section.title}
+                  </h3>
+                  <p>{section.content}</p>
+                </div>
+              ))}
+            </div>
+
             <div className={styles.gitHubActivityContainer}>
+              <h3>
+                <span className={styles.sectionIcon}>
+                  <FaGithub />
+                </span>
+                GitHub Activity
+              </h3>
               <div className={styles.gitHubActivityStyles}>
                 <GitHubActivity username={githubUsername} />
               </div>
             </div>
           </div>
-        </div>
 
-        <div className={styles.skills}>
-          <div className={styles.glowingHeading}>
-            <h2>Skills</h2>
-          </div>
-          <div
-            className={`${styles.skillsContainer} ${
-              isHovered ? styles.hovered : ""
-            }`}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <ul>
-              {skillsList.map((skill) => (
-                <li
-                  key={skill.name}
-                  className={`${styles[`category-${skill.category}`]}`}
-                >
-                  <span className={styles.skillIcon}>{skill.icon}</span>
-                  <span className={styles.skillName}>{skill.name}</span>
-                </li>
-              ))}
-            </ul>
+          <div className={styles.profileImage}>
+            <div className={styles.imageWrapper}>
+              {/* Замените на реальный путь к фотографии */}
+              <Image
+                src="/profile.jpg"
+                alt="Developer Profile"
+                width={300}
+                height={340}
+                className={styles.profilePhoto}
+                priority
+              />
+              <div className={styles.photoOverlay}>
+                <div className={styles.photoInfo}>
+                  <h3>Andrew Eroshenkov</h3>
+                  <p>Based in Serbia</p>
+                </div>
+              </div>
+            </div>
 
-            <div className={styles.hoverMessage}>Hover to stabilize skills</div>
+            <div className={styles.profileStats}>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>2+</span>
+                <span className={styles.statLabel}>Years Experience</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>15+</span>
+                <span className={styles.statLabel}>Projects</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statNumber}>5+</span>
+                <span className={styles.statLabel}>Technologies</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
