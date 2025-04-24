@@ -48,81 +48,126 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
       try {
         setLoading(true);
 
-        // В реальном приложении здесь будет запрос к GitHub GraphQL API
-        // Сейчас создадим эмуляцию данных
+        // GitHub GraphQL API запрос для получения вкладов пользователя
+        const query = `
+          query($username: String!) {
+            user(login: $username) {
+              contributionsCollection {
+                contributionCalendar {
+                  totalContributions
+                  weeks {
+                    contributionDays {
+                      date
+                      contributionCount
+                      color
+                    }
+                  }
+                }
+              }
+            }
+          }
+        `;
 
-        // Создаем фиктивные данные за последний год (52 недели)
-        const mockWeeks: ContributionWeek[] = [];
-        let contributions = 0;
+        const response = await fetch("https://api.github.com/graphql", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${
+              process.env.NEXT_PUBLIC_GITHUB_TOKEN || ""
+            }`,
+          },
+          body: JSON.stringify({
+            query,
+            variables: { username },
+          }),
+        });
+
+        const result = await response.json();
+
+        if (result.errors) {
+          throw new Error(result.errors[0].message);
+        }
+
+        const calendarData =
+          result.data?.user?.contributionsCollection?.contributionCalendar;
+
+        if (!calendarData) {
+          throw new Error("Не удалось получить данные о вкладах");
+        }
+
+        // Преобразование данных в нужный формат
+        const weeks: ContributionWeek[] = [];
+        const totalContributions = calendarData.totalContributions;
         let currentStreak = 0;
         let maxStreak = 0;
         let totalDays = 0;
         let mostActiveDay = { date: "", count: 0 };
 
-        // Генерируем данные для 52 недель
-        for (let w = 0; w < 52; w++) {
-          const days: ContributionDay[] = [];
+        calendarData.weeks.forEach(
+          (week: {
+            contributionDays: Array<{
+              date: string;
+              contributionCount: number;
+              color: string;
+            }>;
+          }) => {
+            const days: ContributionDay[] = [];
 
-          // Генерируем данные для 7 дней недели
-          for (let d = 0; d < 7; d++) {
-            // Разная вероятность коммитов для разных дней недели
-            const isWorkday = d < 5;
-            const max = isWorkday ? 10 : 5;
-            const count =
-              Math.floor(Math.random() * max) * (Math.random() > 0.4 ? 1 : 0);
+            week.contributionDays.forEach(
+              (day: {
+                date: string;
+                contributionCount: number;
+                color: string;
+              }) => {
+                const count = day.contributionCount;
 
-            // Определяем уровень (интенсивность) для отображения
-            let level = 0;
-            if (count > 0) {
-              if (count <= 2) level = 1;
-              else if (count <= 5) level = 2;
-              else if (count <= 8) level = 3;
-              else level = 4;
+                // Определяем уровень (интенсивность) для отображения
+                let level = 0;
+                if (count > 0) {
+                  if (count <= 2) level = 1;
+                  else if (count <= 5) level = 2;
+                  else if (count <= 8) level = 3;
+                  else level = 4;
 
-              // Обновление текущей серии
-              currentStreak++;
-              // Обновление максимальной серии
-              if (currentStreak > maxStreak) {
-                maxStreak = currentStreak;
+                  // Обновление данных о серии вкладов
+                  currentStreak++;
+                  if (currentStreak > maxStreak) {
+                    maxStreak = currentStreak;
+                  }
+                } else {
+                  // Сброс серии
+                  currentStreak = 0;
+                }
+
+                totalDays++;
+
+                // Обновляем информацию о самом активном дне
+                if (count > mostActiveDay.count) {
+                  mostActiveDay = { date: day.date, count };
+                }
+
+                days.push({
+                  date: day.date,
+                  count,
+                  level,
+                });
               }
-            } else {
-              // Сброс текущей серии при отсутствии вкладов
-              currentStreak = 0;
-            }
+            );
 
-            // Обновляем информацию о самом активном дне
-            if (count > mostActiveDay.count) {
-              mostActiveDay.count = count;
-            }
-
-            contributions += count;
-            totalDays++;
-
-            // Вычисляем дату, соответствующую данному дню
-            const date = new Date();
-            date.setDate(date.getDate() - ((51 - w) * 7 + (6 - d)));
-            const dateString = date.toISOString().split("T")[0];
-
-            if (count > mostActiveDay.count) {
-              mostActiveDay = { date: dateString, count };
-            }
-
-            days.push({
-              date: dateString,
-              count,
-              level,
-            });
+            weeks.push({ days });
           }
+        );
 
-          mockWeeks.push({ days });
-        }
+        // Берем только последние 52 недели (год)
+        const lastYearWeeks = weeks.slice(-52);
 
         // Рассчитываем статистику
-        const averagePerDay = totalDays > 0 ? contributions / totalDays : 0;
+        const averagePerDay =
+          totalDays > 0 ? totalContributions / totalDays : 0;
 
-        setContributionData(mockWeeks);
+        setContributionData(lastYearWeeks);
         setStats({
-          totalContributions: contributions,
+          totalContributions,
           streak: currentStreak,
           maxStreak,
           averagePerDay,
@@ -130,6 +175,7 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
         });
         setLoading(false);
       } catch (err) {
+        console.error("Ошибка при получении данных GitHub:", err);
         setError(err instanceof Error ? err.message : "Произошла ошибка");
         setLoading(false);
       }
