@@ -48,6 +48,10 @@
     font-weight: 700;
     letter-spacing: 1px;
   }
+
+  @media (max-width: 768px) {
+    padding: 60px 15px;
+  }
 }
 
 .techBackground {
@@ -122,6 +126,12 @@
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 2.2rem;
+    }
+  }
 }
 
 @keyframes pulse {
@@ -147,6 +157,12 @@
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    max-width: 90%;
+  }
 }
 
 .contactCards {
@@ -161,6 +177,11 @@
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
 }
 
 .contactCard {
@@ -241,6 +262,40 @@
   &:nth-child(7) {
     transition-delay: 0.8s;
   }
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    .cardContent {
+      align-items: center;
+    }
+  }
+
+  &:hover,
+  &.active {
+    @media (max-width: 768px) {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15),
+        0 3px 10px rgba(var(--accent-purple-rgb), 0.15);
+
+      .iconWrapper {
+        transform: scale(1.05);
+        box-shadow: 0 3px 10px rgba(var(--accent-purple-rgb), 0.3),
+          0 0 15px rgba(var(--accent-purple-rgb), 0.5);
+      }
+
+      h3 {
+        transform: none;
+      }
+    }
+  }
 }
 
 .shine {
@@ -275,6 +330,12 @@
   position: relative;
   z-index: 1;
   border: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+  }
 }
 
 .cardContent {
@@ -287,12 +348,20 @@
     margin: 0 0 5px;
     transition: all 0.3s ease;
     font-weight: 600;
+
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
   }
 
   p {
     font-size: 0.95rem;
     color: #bbb;
     margin: 0 0 10px;
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
   }
 }
 
@@ -300,6 +369,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+
+  @media (max-width: 480px) {
+    justify-content: center;
+    margin-top: 10px;
+  }
 }
 
 .tag {
@@ -311,6 +385,11 @@
   font-weight: 500;
   transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.07);
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
 }
 
 .hackathonBadge {
@@ -330,6 +409,20 @@
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease 0.7s, transform 0.6s ease 0.7s;
+
+  @media (max-width: 768px) {
+    padding: 10px 15px;
+    margin-top: 30px;
+    .badgeContent {
+      gap: 8px;
+      p {
+        font-size: 0.9rem;
+      }
+    }
+    .badgeIcon {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 .badgeContent {
@@ -372,6 +465,11 @@
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease 0.8s, transform 0.6s ease 0.8s;
+
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+    margin-top: 25px;
+  }
 }
 
 // Адаптация для меньших экранов

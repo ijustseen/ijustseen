@@ -147,6 +147,8 @@
 
   @media (max-width: 992px) {
     flex-direction: column-reverse;
+    padding-right: 0;
+    align-items: center;
   }
 }
 
@@ -155,6 +157,14 @@
   display: flex;
   flex-direction: column;
   max-width: 65%;
+
+  @media (max-width: 992px) {
+    max-width: 100%;
+    padding: 0 20px;
+    margin-top: 30px;
+    align-items: center;
+    text-align: center;
+  }
 }
 
 .tabsContainer {
@@ -182,6 +192,16 @@
       rgba(var(--accent-purple-rgb), 0.3),
       transparent
     );
+  }
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    border-bottom: none;
+    &::after {
+      display: none;
+    }
   }
 }
 
@@ -271,6 +291,33 @@
       transform: scale(1.2);
     }
   }
+
+  @media (max-width: 768px) {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    flex: auto;
+    margin-right: 0;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &::after {
+      display: none;
+    }
+
+    &.activeTab {
+      background: rgba(var(--accent-purple-rgb), 0.2);
+      border-color: rgba(var(--accent-purple-rgb), 0.4);
+    }
+
+    &:hover::before {
+      background: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
 }
 
 .tabIcon {
@@ -342,6 +389,11 @@
     opacity: 0.3;
     filter: blur(10px);
   }
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    margin-top: 15px;
+  }
 }
 
 .tabPanel {
@@ -384,6 +436,10 @@
     z-index: 2;
     padding-top: 5px;
     padding-bottom: 5px;
+
+    @media (max-width: 768px) {
+      text-align: center;
+    }
   }
 
   &.activePanel {
@@ -439,6 +495,15 @@
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+
+  @media (max-width: 992px) {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+  }
 }
 
 .imageWrapper {
@@ -508,6 +573,11 @@
   &:hover {
     transform: scale(1.05);
   }
+
+  @media (max-width: 480px) {
+    width: 250px;
+    height: auto;
+  }
 }
 
 .photoOverlay {
@@ -559,6 +629,11 @@
   }
 
   transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+
+  @media (max-width: 480px) {
+    gap: 10px;
+    padding: 15px;
+  }
 }
 
 .statItem {
@@ -573,6 +648,16 @@
   &:last-child {
     border-bottom: none;
     padding-bottom: 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px;
+    .statNumber {
+      font-size: 1.5rem;
+    }
+    .statLabel {
+      font-size: 0.75rem;
+    }
   }
 }
 
@@ -634,6 +719,13 @@
       }
     }
   }
+
+  @media (max-width: 768px) {
+    padding: 0 20px;
+    h3 {
+      text-align: center;
+    }
+  }
 }
 
 .gitHubActivityStyles {
@@ -642,6 +734,15 @@
   transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
   opacity: 0;
   transform: translateY(20px);
+
+  @media (max-width: 992px) {
+    padding: 15px;
+  }
+
+  @media (max-width: 768px) {
+    // Здесь можно добавить стили для изменения отображения GitHubActivity на мобильных, если потребуется
+    // Например, сделать его вертикальным или уменьшить шрифты
+  }
 }
 
 .activityDescription {

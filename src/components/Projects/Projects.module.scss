@@ -153,6 +153,12 @@
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
 }
 
 .infoColumn {
@@ -172,6 +178,52 @@
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+
+  @media (max-width: 992px) {
+    min-width: 0;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    padding: 25px;
+    order: 2;
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px;
+
+    h3 {
+      font-size: 1.8rem;
+      padding-left: 10px;
+      margin-bottom: 20px;
+
+      &::after {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+      }
+    }
+
+    .projectDescription {
+      p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+    }
+
+    .skills {
+      ul {
+        font-size: 0.85rem;
+      }
+    }
+
+    .navigation {
+      button {
+        font-size: 1.1rem;
+      }
+      span {
+        font-size: 0.9rem;
+      }
+    }
+  }
 
   // Новая структура: заголовок с номером -> описание -> навыки -> навигация
 
@@ -402,6 +454,32 @@
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+
+  @media (max-width: 992px) {
+    order: 1;
+    width: 100%;
+    max-width: 600px;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .laptopPreview,
+    .phoneContainer {
+      display: none;
+    }
+    .projectButton {
+      margin-top: 0;
+      position: relative;
+      bottom: auto;
+      left: auto;
+      right: auto;
+      transform: none;
+      width: 100%;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 }
 
 // Плейсхолдеры для ноутбука и телефона
@@ -448,6 +526,11 @@
 
   filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.3))
     drop-shadow(-1px -1px 3px rgba(80, 80, 80, 0.1));
+
+  @media (max-width: 992px) {
+    transform: perspective(600px) rotateX(3deg) scale(0.9);
+    max-width: 500px;
+  }
 }
 
 // Перемещаем кнопку над телефоном
@@ -531,6 +614,12 @@
     &:active {
       cursor: grabbing;
     }
+  }
+
+  @media (max-width: 992px) {
+    transform: rotate(3deg) scale(0.9);
+    right: -10px;
+    bottom: -10px;
   }
 }
 
