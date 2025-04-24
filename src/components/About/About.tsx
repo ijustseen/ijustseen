@@ -18,33 +18,25 @@ const aboutSections = [
     id: "bio",
     title: "Biography",
     icon: <FaUser />,
-    content: `I am a dedicated and passionate junior full-stack developer with a
-    strong enthusiasm for web technologies, clean UI, and creating
-    impactful digital experiences. I thrive in collaborative, agile
-    environments and enjoy transforming complex ideas into functional,
-    user-friendly products.`,
+    content: `I started getting acquainted with development in early childhood at the age of 7, when I first tried to write layout on CodePen. A few years later, I remembered my hobbies and started learning again. At first, only layout, then full-fledged web development and AI, and now I am trying myself in more and more new areas, including game development. Also, in the last year I have been actively participating in hackathons, and even became a winner in 8 App Izazov in Podgorica`,
   },
   {
     id: "education",
     title: "Education",
     icon: <FaGraduationCap />,
-    content: `Computer Science degree with focus on Web Development and Software Engineering.
-    Completed specialization courses in modern JavaScript frameworks and cloud technologies.`,
+    content: `At the moment I am studying at the Jovan Jovanovic Zmaj Gymnasium in a specialized IT class. I took courses in web development and learning Python. However, I got a lot of knowledge through self-study.`,
   },
   {
     id: "interests",
     title: "Interests",
     icon: <FaLightbulb />,
-    content: `Beyond coding, I'm passionate about UI/UX design, keeping up with tech trends, 
-    and exploring new frameworks. I enjoy contributing to open-source projects and attending tech meetups.`,
+    content: `Besides coding, I follow tech trends in AI and learn new frameworks. I enjoy contributing to open source projects and attending tech meetups. I also enjoy playing guitar and traveling, mostly in Europe.`,
   },
   {
     id: "philosophy",
     title: "My Philosophy",
     icon: <FaQuoteRight />,
-    content: `With a user-centric mindset and a keen eye for detail, I strive to
-    write clean, maintainable, and efficient code. I'm always
-    eager to learn new technologies and improve my skills.`,
+    content: `With a user-centric mindset and a keen eye for detail, I strive to write clean, maintainable, and efficient code. I am always looking to learn new technologies and improve my skills, because lack of progress is regression in my opinion..`,
   },
 ];
 

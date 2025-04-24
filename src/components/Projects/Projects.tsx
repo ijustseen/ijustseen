@@ -12,25 +12,25 @@ const projects = [
     description:
       "A hackathon project using AI to create custom assistants from uploaded documentation. Worked on the main interface, assistant system, and subscription logic.",
     achievement: "⚙️ Built with Next.js, deployed as a fully functional MVP.",
-    skills: ["Next.js", "TypeScript", "AI", "Stripe"],
+    skills: ["Next.js", "TypeScript", "AI", "Supabase", "Tailwind"],
     liveUrl: "https://doctalkie-next.vercel.app/",
   },
   {
     id: "learnshare",
     title: "Learn&Share",
     description:
-      "Mobile application that connects people who want to teach and learn various skills through video lessons. Implemented authentication, profiles, reviews, and teacher search.",
+      "Learn&Share is a platform that connects people who want to learn and teach various skills through one-on-one video lessons. Users can find mentors, become teachers themselves, and exchange knowledge in a simple and accessible way. The app features profiles, reviews, chats, and a built-in wallet for booking and managing lessons.",
     achievement: "🏆 Winner of MTS App Challenge (Serbia)",
-    skills: ["React Native", "Firebase", "Node.js"],
+    skills: ["Expo React Native", "Next.js", "LiveKit", "Node.js"],
     liveUrl: "",
   },
   {
     id: "tondash",
     title: "TonDash",
     description:
-      "Mobile application that connects people who want to teach and learn various skills through video lessons. Implemented authentication, profiles, reviews, and teacher search.",
+      "A small project - a game similar to chess, go and similar classic games. Very simple rules of movement with 'catch-up' mechanics. Your ability to analyze global trends on the board is decisive in it.",
     achievement: "🏆 Winner of MTS App Challenge (Serbia)",
-    skills: ["React Native", "Firebase", "Node.js"],
+    skills: ["Next.js", "TON Blockchain"],
     liveUrl: "https://tondash-next.vercel.app/",
   },
 ];

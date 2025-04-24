@@ -194,8 +194,8 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
     });
   };
 
-  if (loading) return <div className={styles.loading}>Загрузка...</div>;
-  if (error) return <div className={styles.error}>Ошибка: {error}</div>;
+  if (loading) return <div className={styles.loading}>Loading...</div>;
+  if (error) return <div className={styles.error}>Error: {error}</div>;
 
   return (
     <div className={styles.githubActivityWrapper}>
@@ -207,7 +207,7 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
                 <div
                   key={dayIndex}
                   className={`${styles.day} ${styles[`level${day.level}`]}`}
-                  title={`${formatDate(day.date)}: ${day.count} контрибуций`}
+                  title={`${formatDate(day.date)}: ${day.count} contributions`}
                 />
               ))}
             </div>
@@ -220,8 +220,8 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            @{username} • {stats.totalContributions} контрибуций за последний
-            год
+            @{username} • {stats.totalContributions} contributions in the last
+            year
           </a>
         </div>
       </div>

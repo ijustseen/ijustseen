@@ -110,8 +110,8 @@ const Contact = () => {
       id: "twitter",
       icon: <FaTwitter />,
       title: "Twitter",
-      link: "https://twitter.com/ijustseen",
-      text: "ijustseen",
+      link: "https://twitter.com/ijustseen_you",
+      text: "ijustseen_you",
       tags: ["Tech Updates", "Networking"],
     },
     {
@@ -120,7 +120,7 @@ const Contact = () => {
       title: "Telegram",
       link: "https://t.me/andr_ewt",
       text: "andr_ewt",
-      tags: ["Fast Response", "Direct Contact"],
+      tags: ["Fastest Response", "Direct Contact"],
     },
     {
       id: "discord",
@@ -128,7 +128,7 @@ const Contact = () => {
       title: "Discord",
       link: "https://discord.com/users/ijustseen",
       text: "ijustseen",
-      tags: ["Community", "Game Devs"],
+      tags: ["Community", "Games)"],
     },
   ];
 
