@@ -36,6 +36,7 @@ a {
   height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
+  position: relative;
 }
 
 .section {
@@ -49,4 +50,20 @@ a {
   padding: 40px;
   padding-right: var(--indicator-reserved-width);
   position: relative;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --indicator-reserved-width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --indicator-reserved-width: 0px;
+  }
+
+  .section {
+    padding-right: 40px;
+  }
 }

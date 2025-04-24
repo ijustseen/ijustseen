@@ -179,11 +179,11 @@ const About = () => {
                 <span className={styles.statLabel}>Years Experience</span>
               </div>
               <div className={styles.statItem}>
-                <span className={styles.statNumber}>15+</span>
-                <span className={styles.statLabel}>Projects</span>
+                <span className={styles.statNumber}>6</span>
+                <span className={styles.statLabel}>Different Projects</span>
               </div>
               <div className={styles.statItem}>
-                <span className={styles.statNumber}>5+</span>
+                <span className={styles.statNumber}>10+</span>
                 <span className={styles.statLabel}>Technologies</span>
               </div>
             </div>

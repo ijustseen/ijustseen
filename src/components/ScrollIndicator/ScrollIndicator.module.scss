@@ -1,6 +1,6 @@
 .indicatorContainer {
   position: fixed;
-  right: 55px;
+  right: 0;
   top: 0;
   height: 100vh;
   display: flex;
@@ -9,6 +9,8 @@
   justify-content: center;
   z-index: 10;
   padding: 0;
+  width: var(--indicator-reserved-width);
+  pointer-events: none;
 
   // Неактивная часть линии (полная высота)
   &::before {
@@ -55,14 +57,15 @@
 }
 
 .dotWrapper {
-  position: relative; // Для позиционирования имени секции
-  padding: 24px 0; // Увеличиваем расстояние
-  z-index: 1; // Точки должны быть над линией
-  display: flex; // Для возможного выравнивания имени, хотя оно абсолютно спозиционировано
-  justify-content: center; // Центрируем содержимое (точку или текст)
+  position: relative;
+  padding: 24px 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  width: 130px; // Чуть шире
-  min-height: 48px; // Увеличиваем мин. высоту
+  width: 100%;
+  min-height: 48px;
+  pointer-events: auto;
 }
 
 .dot {
@@ -115,6 +118,7 @@
   background: rgba(0, 0, 0, 0.9);
   border-radius: 4px;
   width: max-content;
+  pointer-events: auto;
 
   &:hover {
     transform: scale(1.05);
@@ -122,9 +126,16 @@
   }
 }
 
-// Адаптация для меньших экранов (можно скрыть индикатор)
+// Адаптация для экранов планшетов
+@media (max-width: 1024px) {
+  .indicatorContainer {
+    width: 120px;
+  }
+}
+
+// Адаптация для меньших экранов (телефоны)
 @media (max-width: 768px) {
   .indicatorContainer {
-    display: none; // Скрываем индикатор на маленьких экранах
+    display: none;
   }
 }

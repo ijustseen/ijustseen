@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./ScrollIndicator.module.scss";
 
 interface ScrollIndicatorProps {
@@ -11,8 +11,28 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
   currentSectionIndex,
 }) => {
   const indicatorRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Обработка медиа-запросов для определения типа устройства
   useEffect(() => {
+    const checkIsMobile = () => {
+      const mobileWidth = 768;
+      setIsMobile(window.innerWidth <= mobileWidth);
+    };
+
+    // Проверяем размер экрана при загрузке
+    checkIsMobile();
+
+    // Обновляем состояние при изменении размера окна
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  // Обновление высоты активной линии
+  useEffect(() => {
+    // Не выполняем обновление на мобильных устройствах
+    if (isMobile) return;
+
     const container = indicatorRef.current;
     if (!container || sections.length === 0) return;
 
@@ -40,7 +60,10 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
       "--active-line-height",
       `${activeLineHeight}px`
     );
-  }, [currentSectionIndex, sections.length]);
+  }, [currentSectionIndex, sections.length, isMobile]);
+
+  // Не рендерим компонент на мобильных устройствах
+  if (isMobile) return null;
 
   return (
     <div ref={indicatorRef} className={styles.indicatorContainer}>
