@@ -485,3 +485,19 @@ li:nth-child(5n) {
   --background: #121212; // Пример фона
 }
 */
+
+.gitHubActivityContainer {
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.gitHubActivityStyles {
+  margin: 0;
+  border-radius: 8px;
+}

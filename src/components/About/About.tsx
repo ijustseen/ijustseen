@@ -10,12 +10,15 @@ import {
   SiTailwindcss,
   SiGraphql,
 } from "react-icons/si";
+import GitHubActivity from "../GitHub/GitHubActivity";
 
 const About = () => {
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [techElements, setTechElements] = useState<React.ReactNode[]>([]);
+  // Ваше имя пользователя GitHub
+  const githubUsername = "ijustseen";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -109,35 +112,12 @@ const About = () => {
               write clean, maintainable, and efficient code. I&apos;m always
               eager to learn new technologies and improve my skills.
             </p>
-            <div className={styles.codeSnippet}>
-              <pre>
-                <code>
-                  <span className={styles.keyword}>const</span> developer ={" "}
-                  {"{"}
-                  <br />
-                  {"  "}
-                  <span className={styles.property}>name</span>:{" "}
-                  <span className={styles.string}>
-                    &quot;Andrew Eroshenkov&quot;
-                  </span>
-                  ,
-                  <br />
-                  {"  "}
-                  <span className={styles.property}>passion</span>:{" "}
-                  <span className={styles.string}>
-                    &quot;Building amazing web apps&quot;
-                  </span>
-                  ,
-                  <br />
-                  {"  "}
-                  <span className={styles.property}>seeking</span>:{" "}
-                  <span className={styles.string}>
-                    &quot;New challenges & hackathons&quot;
-                  </span>
-                  <br />
-                  {"}"};
-                </code>
-              </pre>
+
+            {/* GitHub активность вместо блока кода */}
+            <div className={styles.gitHubActivityContainer}>
+              <div className={styles.gitHubActivityStyles}>
+                <GitHubActivity username={githubUsername} />
+              </div>
             </div>
           </div>
         </div>
