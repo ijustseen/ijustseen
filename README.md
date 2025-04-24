@@ -73,13 +73,19 @@ This portfolio is not just a showcase of my work, but also a reflection of my de
    npm install
    ```
 
-4. **Run the development server**
+4. **Add .env.local with**
+
+   ```
+   NEXT_PUBLIC_GITHUB_TOKEN=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
+   ```
+
+5. **Run the development server**
 
    ```bash
    npm run dev
    ```
 
-5. **Open in your browser**  
+6. **Open in your browser**  
    Visit `http://localhost:3000` to view the portfolio
 
 Note: Make sure you have Node.js (v18 or higher) installed on your system.
