@@ -1,37 +1,36 @@
-"use client";
+'use client';
 
-import React, { useState, useRef, useEffect } from "react";
-import styles from "./Projects.module.scss";
-import { FaArrowLeft, FaArrowRight, FaExternalLinkAlt } from "react-icons/fa";
-import Phone3D from "./Phone3D";
+import React, { useState, useRef, useEffect } from 'react';
+import styles from './Projects.module.scss';
+import { FaArrowLeft, FaArrowRight, FaExternalLinkAlt } from 'react-icons/fa';
 
 const projects = [
   {
-    id: "doctalkie",
-    title: "DocTalkie",
+    id: 'doctalkie',
+    title: 'DocTalkie',
     description:
-      "A hackathon project using AI to create custom assistants from uploaded documentation. Worked on the main interface, assistant system, and subscription logic.",
-    achievement: "⚙️ Built with Next.js, deployed as a fully functional MVP.",
-    skills: ["Next.js", "AI", "Supabase", "Tailwind"],
-    liveUrl: "https://doctalkie-next.vercel.app/",
+      'A hackathon project using AI to create custom assistants from uploaded documentation. Worked on the main interface, assistant system, and subscription logic.',
+    achievement: '⚙️ Built with Next.js, deployed as a fully functional MVP.',
+    skills: ['Next.js', 'AI', 'Supabase', 'Tailwind'],
+    liveUrl: 'https://doctalkie-next.vercel.app/',
   },
   {
-    id: "learnshare",
-    title: "Learn&Share",
+    id: 'learnshare',
+    title: 'Learn&Share',
     description:
-      "Learn&Share is a platform that connects people who want to learn and teach various skills through one-on-one video lessons. Users can find mentors, become teachers themselves, and exchange knowledge in a simple and accessible way. The app features profiles, reviews, chats, and a built-in wallet for booking and managing lessons.",
-    achievement: "🏆 Winner of MTS App Challenge (Serbia)",
-    skills: ["Expo React Native", "Next.js", "LiveKit", "Node.js"],
-    liveUrl: "",
+      'Learn&Share is a platform that connects people who want to learn and teach various skills through one-on-one video lessons. Users can find mentors, become teachers themselves, and exchange knowledge in a simple and accessible way. The app features profiles, reviews, chats, and a built-in wallet for booking and managing lessons.',
+    achievement: '🏆 Winner of MTS App Challenge (Serbia)',
+    skills: ['Expo React Native', 'Next.js', 'LiveKit', 'Node.js'],
+    liveUrl: '',
   },
   {
-    id: "tondash",
-    title: "TonDash",
+    id: 'tondash',
+    title: 'TonDash',
     description:
       "A small project - a game similar to chess, go and similar classic games. Very simple rules of movement with 'catch-up' mechanics. Your ability to analyze global trends on the board is decisive in it.",
-    achievement: "🏆 Winner of MTS App Challenge (Serbia)",
-    skills: ["Next.js", "TON Blockchain"],
-    liveUrl: "https://tondash-next.vercel.app/",
+    achievement: '🏆 Winner of MTS App Challenge (Serbia)',
+    skills: ['Next.js', 'TON Blockchain'],
+    liveUrl: 'https://tondash-next.vercel.app/',
   },
 ];
 
@@ -39,7 +38,7 @@ const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [direction, setDirection] = useState<"next" | "prev" | null>(null);
+  const [direction, setDirection] = useState<'next' | 'prev' | null>(null);
   const [currentProjectData, setCurrentProjectData] = useState(projects[0]);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -74,48 +73,42 @@ const Projects = () => {
     }
   }, [isTransitioning, currentIndex]);
 
-  const handleTransition = (dir: "next" | "prev") => {
+  const handleTransition = (dir: 'next' | 'prev') => {
     if (isTransitioning) return;
 
     setIsTransitioning(true);
     setDirection(dir);
 
     setTimeout(() => {
-      if (dir === "next") {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === projects.length - 1 ? 0 : prevIndex + 1
-        );
+      if (dir === 'next') {
+        setCurrentIndex(prevIndex => (prevIndex === projects.length - 1 ? 0 : prevIndex + 1));
       } else {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === 0 ? projects.length - 1 : prevIndex - 1
-        );
+        setCurrentIndex(prevIndex => (prevIndex === 0 ? projects.length - 1 : prevIndex - 1));
       }
 
       setTimeout(() => {
         setIsTransitioning(false);
         setDirection(null);
-      }, 600);
-    }, 300);
+      }, 800);
+    }, 400);
   };
 
-  const handlePrev = () => handleTransition("prev");
-  const handleNext = () => handleTransition("next");
+  const handlePrev = () => handleTransition('prev');
+  const handleNext = () => handleTransition('next');
 
   return (
     <section
       id="projects"
       className={`section ${styles.projects} ${
-        isVisible ? styles.visible : ""
-      } ${isTransitioning ? styles.transitioning : ""} ${
-        direction ? styles[`slide-${direction}`] : ""
+        isVisible ? styles.visible : ''
+      } ${isTransitioning ? styles.transitioning : ''} ${
+        direction ? styles[`slide-${direction}`] : ''
       }`}
       ref={containerRef}
     >
       <div className={styles.projectDisplay}>
         <div className={styles.infoColumn}>
-          <h3 data-number={`0${currentIndex + 1}`}>
-            {currentProjectData.title}
-          </h3>
+          <h3 data-number={`0${currentIndex + 1}`}>{currentProjectData.title}</h3>
 
           <div className={styles.projectDescription}>
             <p>{currentProjectData.description}</p>
@@ -135,7 +128,7 @@ const Projects = () => {
               onClick={handlePrev}
               aria-label="Previous project"
               disabled={isTransitioning}
-              className={isTransitioning ? styles.disabled : ""}
+              className={isTransitioning ? styles.disabled : ''}
             >
               <FaArrowLeft />
             </button>
@@ -144,7 +137,7 @@ const Projects = () => {
               onClick={handleNext}
               aria-label="Next project"
               disabled={isTransitioning}
-              className={isTransitioning ? styles.disabled : ""}
+              className={isTransitioning ? styles.disabled : ''}
             >
               <FaArrowRight />
             </button>
@@ -154,8 +147,7 @@ const Projects = () => {
         <div className={styles.previewColumn}>
           <div className={styles.laptopPreview}>
             <div className={styles.laptopScreen}>
-              {currentProjectData.liveUrl &&
-              currentProjectData.liveUrl !== "" ? (
+              {currentProjectData.liveUrl && currentProjectData.liveUrl !== '' ? (
                 <iframe
                   key={`laptop-${currentProjectData.id}`}
                   src={currentProjectData.liveUrl}
@@ -187,7 +179,7 @@ const Projects = () => {
               )}
             </div>
           </div>
-          {currentProjectData.liveUrl && currentProjectData.liveUrl !== "" ? (
+          {currentProjectData.liveUrl && currentProjectData.liveUrl !== '' ? (
             <a
               href={currentProjectData.liveUrl}
               target="_blank"
@@ -198,21 +190,10 @@ const Projects = () => {
               <FaExternalLinkAlt />
             </a>
           ) : (
-            <button
-              className={`${styles.projectButton} ${styles.inactiveButton}`}
-              disabled
-            >
+            <button className={`${styles.projectButton} ${styles.inactiveButton}`} disabled>
               <span>In development</span>
             </button>
           )}
-          <div className={styles.phoneContainer}>
-            <Phone3D
-              key={`phone3d-${currentProjectData.id}`}
-              liveUrl={currentProjectData.liveUrl}
-              projectId={currentProjectData.id}
-              projectTitle={currentProjectData.title}
-            />
-          </div>
         </div>
       </div>
     </section>

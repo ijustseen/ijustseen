@@ -48,6 +48,13 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
       try {
         setLoading(true);
 
+        const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+        if (!token) {
+          throw new Error(
+            "GitHub токен не найден. Пожалуйста, добавьте NEXT_PUBLIC_GITHUB_TOKEN в .env.local"
+          );
+        }
+
         // GitHub GraphQL API запрос для получения вкладов пользователя
         const query = `
           query($username: String!) {
@@ -72,9 +79,7 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${
-              process.env.NEXT_PUBLIC_GITHUB_TOKEN || ""
-            }`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             query,
@@ -85,13 +90,17 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
         const result = await response.json();
 
         if (result.errors) {
+          console.error("GitHub API Errors:", result.errors);
           throw new Error(result.errors[0].message);
         }
+
+        console.log("GitHub API Response:", result);
 
         const calendarData =
           result.data?.user?.contributionsCollection?.contributionCalendar;
 
         if (!calendarData) {
+          console.error("Calendar data is missing:", result);
           throw new Error("Не удалось получить данные о вкладах");
         }
 

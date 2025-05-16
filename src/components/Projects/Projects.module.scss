@@ -1,4 +1,4 @@
-@use "sass:color";
+@use 'sass:color';
 
 .projects {
   justify-content: center;
@@ -40,7 +40,9 @@
       .projectDescription,
       .skills {
         opacity: 0;
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
       }
 
       h3 {
@@ -69,7 +71,9 @@
 
       .projectButton {
         opacity: 0.7;
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
       }
     }
   }
@@ -144,20 +148,28 @@
 // Новые стили для двухколоночного макета
 .projectDisplay {
   display: flex;
-  gap: 20px; // Уменьшено до 20px
-  align-items: stretch; // Изменено с flex-start на stretch для выравнивания высоты
-  max-width: 1200px;
+  gap: 40px;
   width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  overflow: visible;
+  padding: 0 20px;
+  position: relative;
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(40px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 
   @media (max-width: 992px) {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    padding: 0 15px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 20px;
+    padding: 0 10px;
   }
 }
 
@@ -165,24 +177,26 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-width: 350px; // Добавляем минимальную ширину
-  // Создаем совершенно новый стиль
-  padding: 30px; // Добавляем паддинг для всей колонки
+  min-width: 350px;
+  max-width: 500px;
+  padding: 30px;
   border-radius: 20px;
-  background: rgba(15, 15, 15, 0.85); // Добавляем более четкий фон
-  backdrop-filter: blur(15px); // Усиливаем эффект blur
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); // Добавляем тень для выделения
-  border: 1px solid rgba(255, 255, 255, 0.08); // Тонкая обводка
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
-  height: 450px; // Устанавливаем фиксированную высоту
+  height: 100%;
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+  transition:
+    opacity 0.6s ease 0.2s,
+    transform 0.6s ease 0.2s;
 
   @media (max-width: 992px) {
     min-width: 0;
+    max-width: 100%;
     width: 100%;
-    max-width: 600px;
     height: auto;
     padding: 25px;
     order: 2;
@@ -190,39 +204,7 @@
 
   @media (max-width: 480px) {
     padding: 20px;
-
-    h3 {
-      font-size: 1.8rem;
-      padding-left: 10px;
-      margin-bottom: 20px;
-
-      &::after {
-        font-size: 0.8rem;
-        padding: 3px 8px;
-      }
-    }
-
-    .projectDescription {
-      p {
-        font-size: 0.9rem;
-        line-height: 1.6;
-      }
-    }
-
-    .skills {
-      ul {
-        font-size: 0.85rem;
-      }
-    }
-
-    .navigation {
-      button {
-        font-size: 1.1rem;
-      }
-      span {
-        font-size: 0.9rem;
-      }
-    }
+    height: auto;
   }
 
   // Новая структура: заголовок с номером -> описание -> навыки -> навигация
@@ -237,12 +219,14 @@
     margin-bottom: 25px;
     padding-left: 15px;
     position: relative;
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
     transition-delay: 0.3s;
 
     // Добавляем акцентный блок слева
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       top: 50%;
@@ -277,7 +261,9 @@
     flex: 1; // Делаем этот блок растягиваемым
     overflow-y: auto; // Добавляем прокрутку, если текст не помещается
     max-height: 220px; // Ограничиваем максимальную высоту
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
     transition-delay: 0.4s;
 
     p {
@@ -298,10 +284,16 @@
   // Контейнер для блока навыков
   .skills {
     margin: 0 0 20px 0;
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 8px;
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
     transition-delay: 0.5s;
 
-    // Заголовок блока навыков
     strong {
       display: block;
       font-size: 0.85rem;
@@ -309,34 +301,9 @@
       letter-spacing: 1.5px;
       color: rgba(255, 255, 255, 0.5);
       margin-bottom: 12px;
-      padding-left: 15px;
-    }
-
-    ul {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-
-      li {
-        background: rgba(var(--accent-purple-rgb), 0.08);
-        backdrop-filter: blur(5px);
-        border: 1px solid rgba(var(--accent-purple-rgb), 0.2);
-        color: var(--accent-purple);
-        padding: 6px 14px;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        transition: all 0.2s ease;
-        cursor: default;
-
-        &:hover {
-          background: rgba(var(--accent-purple-rgb), 0.15);
-          transform: translateY(-2px);
-        }
-      }
+      padding-left: 0;
+      width: 100%;
+      text-align: left;
     }
   }
 
@@ -381,7 +348,7 @@
 
       // Добавляем эффект свечения
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
@@ -438,188 +405,92 @@
 }
 
 .previewColumn {
-  flex: 2;
+  flex: 1.2;
   display: flex;
   flex-direction: column;
-  align-items: center; // Центрируем элементы
-  justify-content: flex-start; // Выравниваем сверху
-  gap: 20px; // Добавляем отступ между элементами
-  position: relative;
-  min-height: 450px; // Увеличиваем высоту для соответствия infoColumn
-  min-width: 540px; // Устанавливаем минимальную ширину
-  height: 450px; // Фиксированная высота
-  padding-bottom: 20px;
-  overflow: visible;
-  margin-left: -30px;
+  align-items: center;
+  gap: 25px;
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+  transition:
+    opacity 0.6s ease 0.3s,
+    transform 0.6s ease 0.3s;
 
   @media (max-width: 992px) {
-    order: 1;
     width: 100%;
     max-width: 600px;
-    align-items: center;
   }
 
-  @media (max-width: 768px) {
-    .laptopPreview,
-    .phoneContainer {
-      display: none;
-    }
-    .projectButton {
-      margin-top: 0;
-      position: relative;
-      bottom: auto;
-      left: auto;
-      right: auto;
-      transform: none;
-      width: 100%;
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+  @media (max-width: 480px) {
+    gap: 15px;
   }
 }
 
-// Плейсхолдеры для ноутбука и телефона
-.laptopPreview,
-.phonePreview {
-  // background-color: #2a2a2a; // Заменим на градиент или более сложный фон
-  border: none; // Убираем старую границу
-  // padding: 15px; // Убираем общий padding, будем управлять через размеры экрана/корпуса
-  display: flex; // Оставляем flex для выравнивания экрана
+// Плейсхолдеры для ноутбука
+.laptopPreview {
+  border: none;
+  display: flex;
   justify-content: center;
   align-items: center;
-  // Добавим тени для объема
   filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
 }
 
 .laptopPreview {
-  // Увеличиваем размеры ноутбука
-  height: 340px; // Было 300px
-  width: 540px; // Было 480px
+  width: 100%;
+  max-width: 800px;
   position: relative;
-  z-index: 1;
-  background: linear-gradient(145deg, #383838, #1f1f1f);
-  border-radius: 12px;
-  padding: 12px;
-  margin-left: -20px;
-  transform: perspective(800px) rotateX(10deg); // Добавляем небольшой наклон для 3D-эффекта
   opacity: 0;
-  transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
-  transform-origin: center center; // Фиксируем точку трансформации
-  will-change: transform, opacity; // Оптимизация производительности
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 5%;
-    width: 90%;
-    height: 12px;
-    background: linear-gradient(180deg, #222, #111);
-    border-radius: 0 0 8px 8px;
-    z-index: -1;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-  }
-
-  filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.3))
-    drop-shadow(-1px -1px 3px rgba(80, 80, 80, 0.1));
+  transform: perspective(800px) rotateX(5deg) translateY(40px);
+  transition:
+    opacity 0.6s ease 0.4s,
+    transform 0.6s ease 0.4s;
 
   @media (max-width: 992px) {
-    transform: perspective(600px) rotateX(3deg) scale(0.9);
-    max-width: 500px;
+    max-width: 600px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 100%;
   }
 }
 
-// Перемещаем кнопку над телефоном
-.projectButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background-color: var(--accent-purple);
-  color: #fff;
-  padding: 12px 24px; // Делаем чуть шире
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 500;
-  margin: 30px auto 15px; // Меняем отступы
-  width: fit-content;
-  min-width: 180px; // Минимальная ширина для обеих кнопок
-  height: 48px; // Фиксированная высота для обеих кнопок
-  border: none;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 12px rgba(var(--accent-purple-rgb), 0.3);
-  letter-spacing: 0.5px;
-  z-index: 3;
+.laptopScreen {
+  background-color: #111;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
   position: relative;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease 0.7s, transform 0.6s ease 0.7s,
-    background-color 0.25s, box-shadow 0.25s;
-  will-change: transform, opacity; // Оптимизация производительности
+  overflow: hidden;
+  transition: filter 0.5s ease;
+  will-change: filter;
 
-  // Стиль для текста внутри кнопки
-  span {
-    font-size: 1rem;
-  }
-
-  // Иконка внутри кнопки
-  svg {
-    font-size: 0.85rem;
-    transition: transform 0.25s ease;
-  }
-
-  &:hover {
-    background-color: color.adjust(#8860e6, $lightness: 5%);
-    transform: translateY(-2px);
-    box-shadow: 0 7px 15px rgba(var(--accent-purple-rgb), 0.4);
-
-    svg {
-      transform: translate(3px, -3px);
-    }
-  }
-
-  &:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 8px rgba(var(--accent-purple-rgb), 0.25);
+  iframe {
+    width: 1440px;
+    height: 900px;
+    border: none;
+    transform: scale(0.375);
+    transform-origin: 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
 
 .phoneContainer {
-  position: absolute;
-  bottom: -60px; // Смещаем ниже
-  right: 50px; // Смещаем правее
-  z-index: 2;
-  width: 210px; // Увеличиваем размер
-  height: 360px; // Увеличиваем размер
-  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.4)); // Усиливаем тень
-  overflow: visible;
-  transform: perspective(800px) rotate(5deg) rotateX(5deg); // Добавляем перспективу
+  position: relative;
+  width: 180px;
+  height: 360px;
   opacity: 0;
-  transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s, filter 0.5s ease;
-  transform-origin: center center;
-  will-change: transform, opacity, filter;
+  transform: rotate(5deg) translateY(40px);
+  transition:
+    opacity 0.6s ease 0.5s,
+    transform 0.6s ease 0.5s;
 
-  canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-    cursor: grab;
-    overflow: visible;
-    border-radius: 12px;
-
-    &:active {
-      cursor: grabbing;
-    }
-  }
-
-  @media (max-width: 992px) {
-    transform: rotate(3deg) scale(0.9);
-    right: -10px;
-    bottom: -10px;
+  @media (max-width: 480px) {
+    width: 150px;
+    height: 300px;
   }
 }
 
@@ -645,26 +516,6 @@
   }
 }
 
-.laptopScreen {
-  // Добавляем внутреннюю тень для эффекта стекла/глубины
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow: hidden;
-  transition: filter 0.5s ease;
-  will-change: filter;
-
-  iframe {
-    width: 1440px; // Устанавливаем фиксированную большую ширину
-    height: 900px; // И высоту как у десктопа
-    border: none;
-    transform: scale(0.375); // Масштабируем для уменьшения
-    transform-origin: 0 0; // Трансформация начинается от верхнего левого угла
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-}
-
 .phoneScreen {
   background-color: #000; // Экран черный
   width: 100%;
@@ -683,16 +534,16 @@
 // Обновляем адаптивные стили
 @media (max-width: 992px) {
   .projectDisplay {
-    flex-direction: column; // Меняем на вертикальное расположение
-    align-items: center; // Центрируем колонки
+    flex-direction: column;
+    align-items: center;
   }
 
   .infoColumn,
   .previewColumn {
-    min-width: unset; // Сбрасываем минимальную ширину
-    min-height: unset; // Сбрасываем минимальную высоту
-    width: 100%; // Занимают всю ширину
-    height: auto; // Высота по содержимому
+    min-width: unset;
+    min-height: unset;
+    width: 100%;
+    height: auto;
   }
 
   .previewColumn {
@@ -702,7 +553,7 @@
   }
 
   .projectDescription {
-    max-height: none; // Убираем ограничение высоты
+    max-height: none;
   }
 
   .laptopPreview {
@@ -711,17 +562,7 @@
     max-width: 500px;
     height: auto;
     aspect-ratio: 16 / 10;
-    transform: none; // Убираем наклон на мобильных
-  }
-
-  .phoneContainer {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    width: 160px;
-    height: 280px;
-    margin: 0 auto;
-    transform: none; // Убираем наклон на мобильных
+    transform: none;
   }
 
   .projectButton {
@@ -750,7 +591,7 @@
   .laptopScreen {
     iframe {
       width: 1440px;
-      transform: scale(0.345); // Уменьшаем масштаб для меньших экранов
+      transform: scale(0.345);
     }
   }
 }
@@ -770,12 +611,6 @@
     aspect-ratio: 16 / 10;
   }
 
-  .phoneContainer {
-    width: 180px;
-    height: 315px;
-    margin-top: 15px;
-  }
-
   .infoColumn {
     h3 {
       font-size: 1.8rem;
@@ -792,18 +627,12 @@
 
   .laptopScreen {
     iframe {
-      transform: scale(0.31); // Еще меньше масштаб для мобильных
+      transform: scale(0.31);
     }
   }
 }
 
 @media (max-width: 480px) {
-  .phoneContainer {
-    width: 160px;
-    height: 280px;
-    margin-top: 10px;
-  }
-
   .infoColumn {
     h3 {
       font-size: 1.7rem;
@@ -812,7 +641,7 @@
 
   .laptopScreen {
     iframe {
-      transform: scale(0.28); // Масштаб для самых маленьких экранов
+      transform: scale(0.28);
     }
   }
 }
@@ -851,5 +680,111 @@
     border-radius: 8px;
     font-size: 14px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+.projectButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 25px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+
+  @media (max-width: 480px) {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(var(--accent-blue-rgb), 0.3);
+  }
+}
+
+.skillGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 18px;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+.skillCard {
+  background: rgba(var(--accent-purple-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-purple-rgb), 0.18);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px 10px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 90px;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(var(--accent-purple-rgb), 0.18);
+    transform: translateY(-2px) scale(1.03);
+    background: rgba(var(--accent-purple-rgb), 0.13);
+  }
+}
+
+.skillIcon {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 6px rgba(var(--accent-purple-rgb), 0.25));
+}
+
+.skillName {
+  color: var(--accent-purple);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .skillGrid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+  .skillCard {
+    min-height: 80px;
+    padding: 14px 6px 10px 6px;
+  }
+  .skillName {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skillGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .skillCard {
+    min-height: 70px;
+    padding: 10px 4px 8px 4px;
+  }
+  .skillName {
+    font-size: 0.9rem;
   }
 }

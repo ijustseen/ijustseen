@@ -1,8 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./ScrollIndicator.module.scss";
+import React, { useEffect, useRef } from 'react';
+import styles from './ScrollIndicator.module.scss';
+import { useIsMobile } from '@/hooks/useIsMobile';
+import { SectionId, SectionName } from '@/constants/sections';
+
+interface Section {
+  readonly id: SectionId;
+  readonly name: SectionName;
+}
 
 interface ScrollIndicatorProps {
-  sections: { id: string; name: string }[];
+  sections: readonly Section[];
   currentSectionIndex: number;
 }
 
@@ -11,26 +18,9 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
   currentSectionIndex,
 }) => {
   const indicatorRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
 
-  // Обработка медиа-запросов для определения типа устройства
   useEffect(() => {
-    const checkIsMobile = () => {
-      const mobileWidth = 768;
-      setIsMobile(window.innerWidth <= mobileWidth);
-    };
-
-    // Проверяем размер экрана при загрузке
-    checkIsMobile();
-
-    // Обновляем состояние при изменении размера окна
-    window.addEventListener("resize", checkIsMobile);
-    return () => window.removeEventListener("resize", checkIsMobile);
-  }, []);
-
-  // Обновление высоты активной линии
-  useEffect(() => {
-    // Не выполняем обновление на мобильных устройствах
     if (isMobile) return;
 
     const container = indicatorRef.current;
@@ -56,13 +46,9 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
         }
       }
     }
-    container.style.setProperty(
-      "--active-line-height",
-      `${activeLineHeight}px`
-    );
+    container.style.setProperty('--active-line-height', `${activeLineHeight}px`);
   }, [currentSectionIndex, sections.length, isMobile]);
 
-  // Не рендерим компонент на мобильных устройствах
   if (isMobile) return null;
 
   return (
@@ -81,7 +67,7 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({
             <a
               href={`#${section.id}`}
               className={`${styles.dot} ${
-                index < currentSectionIndex ? styles.active : ""
+                index < currentSectionIndex ? styles.active : ''
               }`}
               aria-label={`Перейти к секции ${section.name}`}
             />
