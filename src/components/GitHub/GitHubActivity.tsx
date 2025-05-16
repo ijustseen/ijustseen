@@ -46,11 +46,25 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
       try {
         setLoading(true);
 
-        const token = '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';
+        const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
         if (!token) {
           throw new Error(
             'GitHub токен не найден. Пожалуйста, добавьте NEXT_PUBLIC_GITHUB_TOKEN в .env.local'
           );
+        }
+
+        // Проверяем токен через простой REST запрос
+        const testResponse = await fetch('https://api.github.com/user', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/vnd.github.v3+json',
+          },
+        });
+
+        if (!testResponse.ok) {
+          const errorData = await testResponse.json();
+          console.error('Token test failed:', errorData);
+          throw new Error(`Ошибка аутентификации: ${errorData.message}`);
         }
 
         // GitHub GraphQL API запрос для получения вкладов пользователя
@@ -72,6 +86,15 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
             }
           }
         `;
+
+        console.log('Sending GraphQL request with:', {
+          query,
+          variables: { username },
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const response = await fetch('https://api.github.com/graphql', {
           method: 'POST',
