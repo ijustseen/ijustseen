@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import styles from "./GitHubActivity.module.scss";
+import React, { useEffect, useState } from 'react';
+import styles from './GitHubActivity.module.scss';
 
 interface GitHubActivityProps {
   username: string;
@@ -27,16 +27,14 @@ interface GitHubStats {
 }
 
 const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
-  const [contributionData, setContributionData] = useState<ContributionWeek[]>(
-    []
-  );
+  const [contributionData, setContributionData] = useState<ContributionWeek[]>([]);
   const [stats, setStats] = useState<GitHubStats>({
     totalContributions: 0,
     streak: 0,
     maxStreak: 0,
     averagePerDay: 0,
     mostActiveDay: {
-      date: "",
+      date: '',
       count: 0,
     },
   });
@@ -48,10 +46,10 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
       try {
         setLoading(true);
 
-        const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+        const token = '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';
         if (!token) {
           throw new Error(
-            "GitHub токен не найден. Пожалуйста, добавьте NEXT_PUBLIC_GITHUB_TOKEN в .env.local"
+            'GitHub токен не найден. Пожалуйста, добавьте NEXT_PUBLIC_GITHUB_TOKEN в .env.local'
           );
         }
 
@@ -75,10 +73,10 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
           }
         `;
 
-        const response = await fetch("https://api.github.com/graphql", {
-          method: "POST",
+        const response = await fetch('https://api.github.com/graphql', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
@@ -90,18 +88,17 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
         const result = await response.json();
 
         if (result.errors) {
-          console.error("GitHub API Errors:", result.errors);
+          console.error('GitHub API Errors:', result.errors);
           throw new Error(result.errors[0].message);
         }
 
-        console.log("GitHub API Response:", result);
+        console.log('GitHub API Response:', result);
 
-        const calendarData =
-          result.data?.user?.contributionsCollection?.contributionCalendar;
+        const calendarData = result.data?.user?.contributionsCollection?.contributionCalendar;
 
         if (!calendarData) {
-          console.error("Calendar data is missing:", result);
-          throw new Error("Не удалось получить данные о вкладах");
+          console.error('Calendar data is missing:', result);
+          throw new Error('Не удалось получить данные о вкладах');
         }
 
         // Преобразование данных в нужный формат
@@ -110,7 +107,7 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
         let currentStreak = 0;
         let maxStreak = 0;
         let totalDays = 0;
-        let mostActiveDay = { date: "", count: 0 };
+        let mostActiveDay = { date: '', count: 0 };
 
         calendarData.weeks.forEach(
           (week: {
@@ -123,11 +120,7 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
             const days: ContributionDay[] = [];
 
             week.contributionDays.forEach(
-              (day: {
-                date: string;
-                contributionCount: number;
-                color: string;
-              }) => {
+              (day: { date: string; contributionCount: number; color: string }) => {
                 const count = day.contributionCount;
 
                 // Определяем уровень (интенсивность) для отображения
@@ -171,8 +164,7 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
         const lastYearWeeks = weeks.slice(-52);
 
         // Рассчитываем статистику
-        const averagePerDay =
-          totalDays > 0 ? totalContributions / totalDays : 0;
+        const averagePerDay = totalDays > 0 ? totalContributions / totalDays : 0;
 
         setContributionData(lastYearWeeks);
         setStats({
@@ -184,8 +176,8 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
         });
         setLoading(false);
       } catch (err) {
-        console.error("Ошибка при получении данных GitHub:", err);
-        setError(err instanceof Error ? err.message : "Произошла ошибка");
+        console.error('Ошибка при получении данных GitHub:', err);
+        setError(err instanceof Error ? err.message : 'Произошла ошибка');
         setLoading(false);
       }
     };
@@ -196,10 +188,10 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
   // Форматируем дату для отображения
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
-    return date.toLocaleDateString("ru-RU", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
+    return date.toLocaleDateString('ru-RU', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
     });
   };
 
@@ -224,13 +216,8 @@ const GitHubActivity: React.FC<GitHubActivityProps> = ({ username }) => {
         </div>
 
         <div className={styles.profileLink}>
-          <a
-            href={`https://github.com/${username}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            @{username} • {stats.totalContributions} contributions in the last
-            year
+          <a href={`https://github.com/${username}`} target="_blank" rel="noopener noreferrer">
+            @{username} • {stats.totalContributions} contributions in the last year
           </a>
         </div>
       </div>
