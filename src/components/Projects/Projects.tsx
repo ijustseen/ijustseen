@@ -41,6 +41,8 @@ const Projects = () => {
   const [direction, setDirection] = useState<'next' | 'prev' | null>(null);
   const [currentProjectData, setCurrentProjectData] = useState(projects[0]);
   const containerRef = useRef<HTMLDivElement>(null);
+  const laptopScreenRef = useRef<HTMLDivElement>(null);
+  const [iframeScale, setIframeScale] = useState(1);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -72,6 +74,21 @@ const Projects = () => {
       return () => clearTimeout(timer);
     }
   }, [isTransitioning, currentIndex]);
+
+  useEffect(() => {
+    function handleResize() {
+      if (laptopScreenRef.current) {
+        const containerWidth = laptopScreenRef.current.offsetWidth;
+        const containerHeight = laptopScreenRef.current.offsetHeight;
+        const scaleW = containerWidth / 1440;
+        const scaleH = containerHeight / 900;
+        setIframeScale(Math.min(scaleW, scaleH));
+      }
+    }
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleTransition = (dir: 'next' | 'prev') => {
     if (isTransitioning) return;
@@ -145,39 +162,37 @@ const Projects = () => {
         </div>
 
         <div className={styles.previewColumn}>
-          <div className={styles.laptopPreview}>
-            <div className={styles.laptopScreen}>
-              {currentProjectData.liveUrl && currentProjectData.liveUrl !== '' ? (
-                <iframe
-                  key={`laptop-${currentProjectData.id}`}
-                  src={currentProjectData.liveUrl}
-                  title={`${currentProjectData.title} - Laptop Preview`}
-                  loading="lazy"
-                  scrolling="no"
-                  sandbox="allow-scripts allow-same-origin allow-forms"
-                  srcDoc={`
-                    <html>
-                      <head>
-                        <meta name="viewport" content="width=1440, initial-scale=1" />
-                        <style>
-                          body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-                          iframe { width: 100%; height: 100%; border: none; }
-                        </style>
-                      </head>
-                      <body>
-                        <iframe src="${currentProjectData.liveUrl}" width="1440" height="900" 
-                          frameBorder="0" style="transform: scale(1); transform-origin: 0 0;"
-                          sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
-                      </body>
-                    </html>
-                  `}
-                />
-              ) : (
-                <div className={styles.devPlaceholder}>
-                  <div>In development</div>
-                </div>
-              )}
+          <div className={styles.monitorPreview}>
+            <div className={styles.monitorScreen} ref={laptopScreenRef}>
+              <div className={styles.iframeWrapper}>
+                {currentProjectData.liveUrl && currentProjectData.liveUrl !== '' ? (
+                  <iframe
+                    key={`laptop-${currentProjectData.id}`}
+                    src={currentProjectData.liveUrl}
+                    title={`${currentProjectData.title} - Monitor Preview`}
+                    loading="lazy"
+                    style={{
+                      width: 1440,
+                      height: 900,
+                      border: 'none',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      transform: `scale(${iframeScale})`,
+                      transformOrigin: 'top left',
+                      pointerEvents: 'auto',
+                      background: '#fff',
+                    }}
+                    sandbox="allow-scripts allow-same-origin allow-forms"
+                  />
+                ) : (
+                  <div className={styles.devPlaceholder}>
+                    <div>In development</div>
+                  </div>
+                )}
+              </div>
             </div>
+            <div className={styles.monitorLegRight}></div>
           </div>
           {currentProjectData.liveUrl && currentProjectData.liveUrl !== '' ? (
             <a

@@ -18,7 +18,7 @@
       transform: translateY(0);
     }
 
-    .laptopPreview {
+    .monitorPreview {
       opacity: 1;
       transform: perspective(800px) rotateX(5deg);
     }
@@ -59,7 +59,7 @@
     }
 
     .previewColumn {
-      .laptopScreen {
+      .monitorScreen {
         transition: transform 0.3s ease;
         filter: brightness(0.8) blur(1px);
       }
@@ -94,7 +94,7 @@
     }
 
     .previewColumn {
-      .laptopPreview {
+      .monitorPreview {
         transform: perspective(800px) rotateX(5deg) translateX(-15px);
       }
 
@@ -124,7 +124,7 @@
     }
 
     .previewColumn {
-      .laptopPreview {
+      .monitorPreview {
         transform: perspective(800px) rotateX(5deg) translateX(15px);
       }
 
@@ -252,15 +252,17 @@
 
   // Контейнер описания
   .projectDescription {
-    background: transparent; // Убираем фон
-    backdrop-filter: none; // Убираем эффект размытия
-    border: none; // Убираем границу
-    border-radius: 0; // Убираем скругление
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    border-radius: 0;
     margin-bottom: 25px;
-    box-shadow: none; // Убираем тень
-    flex: 1; // Делаем этот блок растягиваемым
-    overflow-y: auto; // Добавляем прокрутку, если текст не помещается
-    max-height: 220px; // Ограничиваем максимальную высоту
+    box-shadow: none;
+    flex: 1;
+    overflow-y: auto;
+    height: 180px; // Фиксированная высота
+    min-height: 180px; // Минимальная высота
+    max-height: 180px; // Максимальная высота
     transition:
       opacity 0.6s ease,
       transform 0.6s ease;
@@ -271,39 +273,48 @@
       line-height: 1.7;
       color: rgba(255, 255, 255, 0.85);
       margin: 0;
-      text-align: left; // Выравнивание текста по левому краю
-
-      // Убираем стилизацию первой буквы, т.к. не вписывается в общий стиль
-      &::first-letter {
-        font-size: inherit;
-        color: inherit;
-      }
+      text-align: left;
     }
   }
 
   // Контейнер для блока навыков
   .skills {
-    margin: 0 0 20px 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 8px;
+    margin-top: 25px;
+    margin-bottom: 16px;
     transition:
       opacity 0.6s ease,
       transform 0.6s ease;
-    transition-delay: 0.5s;
+    transition-delay: 0.4s;
 
     strong {
       display: block;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: rgba(255, 255, 255, 0.5);
-      margin-bottom: 12px;
-      padding-left: 0;
-      width: 100%;
-      text-align: left;
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        background: rgba(var(--accent-purple-rgb), 0.15);
+        color: var(--accent-purple);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        border: 1px solid rgba(var(--accent-purple-rgb), 0.3);
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(var(--accent-purple-rgb), 0.25);
+          transform: translateY(-2px);
+        }
+      }
     }
   }
 
@@ -427,54 +438,98 @@
 }
 
 // Плейсхолдеры для ноутбука
-.laptopPreview {
-  border: none;
+.monitorPreview {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16/10;
+  position: relative;
+  margin: 0 auto;
+  transition: all 0.6s ease;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  // Центральная подставка
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: -48px;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 32px;
+    background: linear-gradient(180deg, #23232b 60%, #18181e 100%);
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+  }
+
+  // Левая ножка
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 22%;
+    bottom: -28px;
+    width: 28px;
+    height: 18px;
+    background: #23232b;
+    border-radius: 8px 8px 12px 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    z-index: 1;
+  }
+
+  // Правая ножка
+  .monitorLegRight {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 22%;
+    bottom: -28px;
+    width: 28px;
+    height: 18px;
+    background: #23232b;
+    border-radius: 8px 8px 12px 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    z-index: 1;
+  }
+}
+
+// Переименовываем .laptopScreen в .monitorScreen
+.monitorScreen {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 3px solid #23232b;
   display: flex;
   justify-content: center;
   align-items: center;
-  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
-}
 
-.laptopPreview {
-  width: 100%;
-  max-width: 800px;
-  position: relative;
-  opacity: 0;
-  transform: perspective(800px) rotateX(5deg) translateY(40px);
-  transition:
-    opacity 0.6s ease 0.4s,
-    transform 0.6s ease 0.4s;
-
-  @media (max-width: 992px) {
-    max-width: 600px;
+  .iframeWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
   }
-
-  @media (max-width: 480px) {
-    max-width: 100%;
-  }
-}
-
-.laptopScreen {
-  background-color: #111;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 6px;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow: hidden;
-  transition: filter 0.5s ease;
-  will-change: filter;
 
   iframe {
     width: 1440px;
     height: 900px;
     border: none;
-    transform: scale(0.375);
-    transform-origin: 0 0;
+    display: block;
     position: absolute;
     top: 0;
     left: 0;
+    transform-origin: top left;
   }
 }
 
@@ -494,7 +549,7 @@
   }
 }
 
-.laptopScreen,
+.monitorScreen,
 .phoneScreen {
   background-color: #111; // Экран
   width: 100%;
@@ -512,7 +567,7 @@
     height: 100%;
     border: none;
     display: block; // Убирает лишние отступы
-    border-radius: 5px; // Должно быть чуть меньше радиуса .laptopScreen
+    border-radius: 5px; // Должно быть чуть меньше радиуса .monitorScreen
   }
 }
 
@@ -556,8 +611,8 @@
     max-height: none;
   }
 
-  .laptopPreview {
-    margin-left: 0;
+  .monitorPreview {
+    // margin-left: 0;
     width: 90%;
     max-width: 500px;
     height: auto;
@@ -588,11 +643,8 @@
     }
   }
 
-  .laptopScreen {
-    iframe {
-      width: 1440px;
-      transform: scale(0.345);
-    }
+  .monitorScreen iframe {
+    transform: scale(0.345);
   }
 }
 
@@ -606,7 +658,7 @@
     gap: 15px;
   }
 
-  .laptopPreview {
+  .monitorPreview {
     height: auto;
     aspect-ratio: 16 / 10;
   }
@@ -625,10 +677,8 @@
     margin: 15px auto;
   }
 
-  .laptopScreen {
-    iframe {
-      transform: scale(0.31);
-    }
+  .monitorScreen iframe {
+    transform: scale(0.31);
   }
 }
 
@@ -639,10 +689,8 @@
     }
   }
 
-  .laptopScreen {
-    iframe {
-      transform: scale(0.28);
-    }
+  .monitorScreen iframe {
+    transform: scale(0.28);
   }
 }
 
@@ -668,22 +716,16 @@
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: #111111;
-  color: #444;
-  font-family: monospace;
-
-  div {
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
+  justify-content: center;
+  background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .projectButton {
+  margin-top: 32px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -699,15 +741,30 @@
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(var(--accent-purple-rgb), 0.2);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--accent-purple-rgb), 0.4);
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  svg {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover svg {
+    transform: translateX(3px);
+  }
 
   @media (max-width: 480px) {
     padding: 10px 20px;
     font-size: 0.9rem;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(var(--accent-blue-rgb), 0.3);
   }
 }
 
