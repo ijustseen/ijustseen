@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useState, useRef, useEffect } from "react";
-import styles from "./Contact.module.scss";
+import React, { useState, useRef, useEffect } from 'react';
+import styles from './Contact.module.scss';
 // Импортируем иконки из react-icons
-import { MdEmail, MdCode, MdRocketLaunch } from "react-icons/md";
+import { MdEmail, MdCode, MdRocketLaunch } from 'react-icons/md';
 import {
   FaGithub,
   FaLinkedin,
@@ -14,7 +14,7 @@ import {
   FaReact,
   FaNodeJs,
   FaDiscord,
-} from "react-icons/fa";
+} from 'react-icons/fa';
 
 const Contact = () => {
   const [activeCard, setActiveCard] = useState<string | null>(null);
@@ -32,13 +32,14 @@ const Contact = () => {
       { threshold: 0.3 }
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+    const currentRef = containerRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -49,32 +50,32 @@ const Contact = () => {
       <FaReact
         key="react"
         className={styles.floatingIcon}
-        style={{ "--delay": "0s" } as React.CSSProperties}
+        style={{ '--delay': '0s' } as React.CSSProperties}
       />,
       <FaNodeJs
         key="node"
         className={styles.floatingIcon}
-        style={{ "--delay": "2s" } as React.CSSProperties}
+        style={{ '--delay': '2s' } as React.CSSProperties}
       />,
       <FaBrain
         key="ai"
         className={styles.floatingIcon}
-        style={{ "--delay": "4s" } as React.CSSProperties}
+        style={{ '--delay': '4s' } as React.CSSProperties}
       />,
       <MdCode
         key="code"
         className={styles.floatingIcon}
-        style={{ "--delay": "6s" } as React.CSSProperties}
+        style={{ '--delay': '6s' } as React.CSSProperties}
       />,
       <FaServer
         key="server"
         className={styles.floatingIcon}
-        style={{ "--delay": "8s" } as React.CSSProperties}
+        style={{ '--delay': '8s' } as React.CSSProperties}
       />,
       <MdRocketLaunch
         key="rocket"
         className={styles.floatingIcon}
-        style={{ "--delay": "10s" } as React.CSSProperties}
+        style={{ '--delay': '10s' } as React.CSSProperties}
       />,
     ];
     setTechIcons(icons);
@@ -83,59 +84,59 @@ const Contact = () => {
   // Определим массив карточек контактов с технологическими тегами
   const contactCards = [
     {
-      id: "email",
+      id: 'email',
       icon: <MdEmail />,
-      title: "Email",
-      link: "mailto:anordgame@gmail.com",
-      text: "anordgame@gmail.com",
-      tags: ["24/7 Response", "Project Inquiries"],
+      title: 'Email',
+      link: 'mailto:anordgame@gmail.com',
+      text: 'anordgame@gmail.com',
+      tags: ['24/7 Response', 'Project Inquiries'],
     },
     {
-      id: "github",
+      id: 'github',
       icon: <FaGithub />,
-      title: "GitHub",
-      link: "https://github.com/ijustseen",
-      text: "ijustseen",
-      tags: ["Open Source", "Code Repository"],
+      title: 'GitHub',
+      link: 'https://github.com/ijustseen',
+      text: 'ijustseen',
+      tags: ['Open Source', 'Code Repository'],
     },
     {
-      id: "linkedin",
+      id: 'linkedin',
       icon: <FaLinkedin />,
-      title: "LinkedIn",
-      link: "https://www.linkedin.com/in/andrew-eroshenkov-27235a30b/",
-      text: "Andrew Eroshenkov",
-      tags: ["Professional Network", "Career"],
+      title: 'LinkedIn',
+      link: 'https://www.linkedin.com/in/andrew-eroshenkov-27235a30b/',
+      text: 'Andrew Eroshenkov',
+      tags: ['Professional Network', 'Career'],
     },
     {
-      id: "twitter",
+      id: 'twitter',
       icon: <FaTwitter />,
-      title: "Twitter",
-      link: "https://twitter.com/ijustseen_you",
-      text: "ijustseen_you",
-      tags: ["Tech Updates", "Networking"],
+      title: 'Twitter',
+      link: 'https://twitter.com/ijustseen_you',
+      text: 'ijustseen_you',
+      tags: ['Tech Updates', 'Networking'],
     },
     {
-      id: "telegram",
+      id: 'telegram',
       icon: <FaTelegram />,
-      title: "Telegram",
-      link: "https://t.me/andr_ewt",
-      text: "andr_ewt",
-      tags: ["Fastest Response", "Direct Contact"],
+      title: 'Telegram',
+      link: 'https://t.me/andr_ewt',
+      text: 'andr_ewt',
+      tags: ['Fastest Response', 'Direct Contact'],
     },
     {
-      id: "discord",
+      id: 'discord',
       icon: <FaDiscord />,
-      title: "Discord",
-      link: "https://discord.com/users/ijustseen",
-      text: "ijustseen",
-      tags: ["Community", "Games)"],
+      title: 'Discord',
+      link: 'https://discord.com/users/ijustseen',
+      text: 'ijustseen',
+      tags: ['Community', 'Games)'],
     },
   ];
 
   return (
     <section
       id="contact"
-      className={`section ${styles.contact} ${isVisible ? styles.visible : ""}`}
+      className={`section ${styles.contact} ${isVisible ? styles.visible : ''}`}
       ref={containerRef}
     >
       <div className={styles.techBackground}>{techIcons}</div>
@@ -145,20 +146,18 @@ const Contact = () => {
       </div>
 
       <p className={styles.subtitle}>
-        Let&apos;s build the next big thing together! Hackathon enthusiast,
-        problem solver, and code craftsman.
+        Let&apos;s build the next big thing together! Hackathon enthusiast, problem solver, and code
+        craftsman.
       </p>
 
       <div className={styles.contactCards}>
-        {contactCards.map((card) => (
+        {contactCards.map(card => (
           <a
             key={card.id}
             href={card.link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${styles.contactCard} ${
-              activeCard === card.id ? styles.active : ""
-            }`}
+            className={`${styles.contactCard} ${activeCard === card.id ? styles.active : ''}`}
             onMouseEnter={() => setActiveCard(card.id)}
             onMouseLeave={() => setActiveCard(null)}
           >
@@ -187,9 +186,7 @@ const Contact = () => {
       </div>
 
       <div className={styles.location}>
-        <p>
-          📍 Location: Novi Sad, Serbia | Available for Remote Collaboration
-        </p>
+        <p>📍 Location: Novi Sad, Serbia | Available for Remote Collaboration</p>
       </div>
     </section>
   );

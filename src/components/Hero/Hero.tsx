@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useState, useRef, useEffect } from "react";
-import styles from "./Hero.module.scss";
+import React, { useState, useRef, useEffect } from 'react';
+import styles from './Hero.module.scss';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,13 +17,14 @@ const Hero = () => {
       { threshold: 0.1 } // Меньший порог для Hero, так как он обычно первый на странице
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+    const currentRef = containerRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -31,17 +32,13 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className={`section ${styles.hero} ${isVisible ? styles.visible : ""}`}
+      className={`section ${styles.hero} ${isVisible ? styles.visible : ''}`}
       ref={containerRef}
     >
       {/* Фоновые анимированные фигуры удалены */}
 
       {/* Основной контент */}
-      <div
-        className={`${styles.contentContainer} ${
-          isVisible ? styles.visible : ""
-        }`}
-      >
+      <div className={`${styles.contentContainer} ${isVisible ? styles.visible : ''}`}>
         <h1 className={styles.title}>
           <span className={styles.nameSpan}>Andrew</span>
           <span className={styles.surnameSpan}>Eroshenkov</span>

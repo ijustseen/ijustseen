@@ -1,40 +1,34 @@
-"use client";
+'use client';
 
-import React, { useState, useRef, useEffect } from "react";
-import styles from "./About.module.scss";
-import GitHubActivity from "../GitHub/GitHubActivity";
-import Image from "next/image";
-import {
-  FaUser,
-  FaGraduationCap,
-  FaLightbulb,
-  FaQuoteRight,
-  FaGithub,
-} from "react-icons/fa";
+import React, { useState, useRef, useEffect } from 'react';
+import styles from './About.module.scss';
+import GitHubActivity from '../GitHub/GitHubActivity';
+import Image from 'next/image';
+import { FaUser, FaGraduationCap, FaLightbulb, FaQuoteRight, FaGithub } from 'react-icons/fa';
 
 // Данные для подразделов About
 const aboutSections = [
   {
-    id: "bio",
-    title: "Biography",
+    id: 'bio',
+    title: 'Biography',
     icon: <FaUser />,
     content: `I started getting acquainted with development in early childhood at the age of 7, when I first tried to write layout on CodePen. A few years later, I remembered my hobbies and started learning again. At first, only layout, then full-fledged web developmentI, and now I am trying myself in more and more new areas, including game development and AI. Also, in the last year I have been actively participating in hackathons, and even became a winner in 8 App Izazov in Podgorica`,
   },
   {
-    id: "education",
-    title: "Education",
+    id: 'education',
+    title: 'Education',
     icon: <FaGraduationCap />,
     content: `At the moment I am studying at the Jovan Jovanovic Zmaj Gymnasium in a specialized IT class. I took courses in web development and learning Python. However, I got a lot of knowledge through self-study.`,
   },
   {
-    id: "interests",
-    title: "Interests",
+    id: 'interests',
+    title: 'Interests',
     icon: <FaLightbulb />,
     content: `Besides coding, I follow tech trends in AI and learn new frameworks. I enjoy contributing to open source projects and attending tech meetups. I also enjoy playing guitar and traveling, mostly in Europe.`,
   },
   {
-    id: "philosophy",
-    title: "My Philosophy",
+    id: 'philosophy',
+    title: 'My Philosophy',
     icon: <FaQuoteRight />,
     content: `With a user-centric mindset and a keen eye for detail, I strive to write clean, maintainable, and efficient code. I am always looking to learn new technologies and improve my skills, because lack of progress is regression in my opinion..`,
   },
@@ -44,9 +38,9 @@ const About = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [techElements, setTechElements] = useState<React.ReactNode[]>([]);
-  const [activeTab, setActiveTab] = useState("bio");
+  const [activeTab, setActiveTab] = useState('bio');
   // Ваше имя пользователя GitHub
-  const githubUsername = "ijustseen";
+  const githubUsername = 'ijustseen';
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -58,13 +52,14 @@ const About = () => {
       { threshold: 0.3 }
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+    const currentRef = containerRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -79,10 +74,10 @@ const About = () => {
           className={styles.techElement}
           style={
             {
-              "--delay": `${i * 0.5}s`,
-              "--size": `${Math.random() * 30 + 5}px`,
-              "--x": `${Math.random() * 100}%`,
-              "--y": `${Math.random() * 100}%`,
+              '--delay': `${i * 0.5}s`,
+              '--size': `${Math.random() * 30 + 5}px`,
+              '--x': `${Math.random() * 100}%`,
+              '--y': `${Math.random() * 100}%`,
             } as React.CSSProperties
           }
         />
@@ -92,21 +87,18 @@ const About = () => {
   }, []);
 
   return (
-    <section
-      id="about"
-      className={`section ${styles.about} ${isVisible ? styles.visible : ""}`}
-    >
+    <section id="about" className={`section ${styles.about} ${isVisible ? styles.visible : ''}`}>
       <div className={styles.techBackground}>{techElements}</div>
 
       <div className={styles.container} ref={containerRef}>
         <div className={styles.aboutContent}>
           <div className={styles.aboutText}>
             <div className={styles.tabsContainer}>
-              {aboutSections.map((section) => (
+              {aboutSections.map(section => (
                 <button
                   key={section.id}
                   className={`${styles.tabButton} ${
-                    activeTab === section.id ? styles.activeTab : ""
+                    activeTab === section.id ? styles.activeTab : ''
                   }`}
                   onClick={() => setActiveTab(section.id)}
                 >
@@ -117,11 +109,11 @@ const About = () => {
             </div>
 
             <div className={styles.contentBox}>
-              {aboutSections.map((section) => (
+              {aboutSections.map(section => (
                 <div
                   key={section.id}
                   className={`${styles.tabPanel} ${
-                    activeTab === section.id ? styles.activePanel : ""
+                    activeTab === section.id ? styles.activePanel : ''
                   }`}
                 >
                   <h3>
