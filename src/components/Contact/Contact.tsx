@@ -103,7 +103,7 @@ const Contact = () => {
       id: 'linkedin',
       icon: <FaLinkedin />,
       title: 'LinkedIn',
-      link: 'https://www.linkedin.com/in/andrew-eroshenkov-27235a30b/',
+      link: 'https://www.linkedin.com/in/andrei-eroshenkov/',
       text: 'Andrew Eroshenkov',
       tags: ['Professional Network', 'Career'],
     },

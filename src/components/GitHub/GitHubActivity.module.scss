@@ -29,7 +29,9 @@
   padding: 1rem;
   border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 
   &:hover {
     transform: translateY(-3px);
@@ -82,7 +84,9 @@
   padding: 1rem 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-2px);
@@ -272,8 +276,13 @@
     font-size: 0.7rem !important;
   }
 
+  .contributionGraphContainer {
+    padding: 0.5rem 0.2rem;
+  }
+
   .contributionGraph {
     gap: 1px;
+    padding: 0.3rem 0;
   }
 
   .day {
@@ -298,5 +307,76 @@
   .mostActiveDay {
     font-size: 0.75rem;
     padding: 0.2rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .githubActivityWrapper {
+    padding: 0;
+  }
+
+  .contributionGraphContainer {
+    padding: 0.3rem 0;
+    margin: 0;
+  }
+
+  .contributionGraph {
+    gap: 1px;
+    padding: 0.2rem 0;
+    justify-content: flex-start;
+  }
+
+  .week {
+    gap: 1px;
+  }
+
+  .day {
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+  }
+
+  .levelSample {
+    width: 6px;
+    height: 6px;
+    border-radius: 1px;
+  }
+
+  .levelIndicator {
+    padding: 0.15rem 0.4rem;
+    gap: 0.15rem;
+    font-size: 0.65rem;
+  }
+
+  .levelLabel {
+    font-size: 0.65rem;
+  }
+
+  .profileLink a {
+    font-size: 0.7rem;
+    line-height: 1.2;
+  }
+
+  .mostActiveDay {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.4rem;
+  }
+
+  .contributionStats {
+    padding: 0.5rem 0.2rem;
+    gap: 0.5rem;
+  }
+
+  .statItem {
+    min-width: 60px;
+    padding: 0.2rem;
+  }
+
+  .statValue {
+    font-size: 1.2rem !important;
+  }
+
+  .statLabel {
+    font-size: 0.6rem !important;
   }
 }

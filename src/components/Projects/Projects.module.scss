@@ -148,11 +148,11 @@
 // Новые стили для двухколоночного макета
 .projectDisplay {
   display: flex;
-  gap: 40px;
+  gap: 30px;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 15px;
   position: relative;
   opacity: 0;
   transform: translateY(40px);
@@ -416,7 +416,7 @@
 }
 
 .previewColumn {
-  flex: 1.2;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;

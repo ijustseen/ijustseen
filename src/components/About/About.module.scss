@@ -11,6 +11,11 @@
     min-height: auto;
   }
 
+  @media (max-width: 480px) {
+    padding: 40px 10px;
+    min-height: auto;
+  }
+
   &.visible {
     .glowingHeading {
       opacity: 1;
@@ -78,6 +83,15 @@
   position: relative;
   z-index: 1;
   margin: 0 auto;
+  padding: 0 20px;
+
+  @media (max-width: 768px) {
+    padding: 0 15px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 10px;
+  }
 
   h2 {
     font-size: 2.8rem;
@@ -748,6 +762,76 @@
   .tabPanel h3,
   .gitHubActivityContainer h3 {
     font-size: 1.5rem;
+  }
+}
+
+// GitHub Activity Container Styles
+.gitHubActivityContainer {
+  width: 100%;
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease 0.6s;
+
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    font-weight: 600;
+
+    .sectionIcon {
+      color: var(--accent-blue);
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 15px;
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+
+      .sectionIcon {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 10px;
+
+    h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.gitHubActivityStyles {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease 0.8s;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(15, 15, 15, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 15px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px;
+    border-radius: 6px;
+    margin: 0 -5px; // Небольшой отрицательный margin для лучшего использования пространства
   }
 }
 
