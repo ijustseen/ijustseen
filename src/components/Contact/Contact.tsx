@@ -104,7 +104,7 @@ const Contact = () => {
       icon: <FaLinkedin />,
       title: 'LinkedIn',
       link: 'https://www.linkedin.com/in/andrei-eroshenkov/',
-      text: 'Andrew Eroshenkov',
+      text: 'Andrei Eroshenkov',
       tags: ['Professional Network', 'Career'],
     },
     {
@@ -119,8 +119,8 @@ const Contact = () => {
       id: 'telegram',
       icon: <FaTelegram />,
       title: 'Telegram',
-      link: 'https://t.me/andr_ewt',
-      text: 'andr_ewt',
+      link: 'https://t.me/andr_ewtf',
+      text: 'andr_ewtf',
       tags: ['Fastest Response', 'Direct Contact'],
     },
     {

@@ -1,12 +1,12 @@
-# Andrew Eroshenkov Portfolio
+# Andrei Eroshenkov Portfolio
 
-## Team Name - Andrew Eroshenkov
+## Team Name - Andrei Eroshenkov
 
-## Members: Andrew Eroshenkov (Frontend Developer, 17 years old, studying in Gymnasium Jovan Jovanovic Znaj)
+## Members: Andrei Eroshenkov (Frontend Developer, 17 years old, studying in Gymnasium Jovan Jovanovic Znaj)
 
 ## Description of the portfolio
 
-Welcome to my developer portfolio! I'm Andrew Eroshenkov, a 17-year-old frontend developer currently studying at Gymnasium Jovan Jovanovic Znaj. This portfolio showcases my skills, projects, and passion for building modern web applications.
+Welcome to my developer portfolio! I'm Andrei Eroshenkov, a 17-year-old frontend developer currently studying at Gymnasium Jovan Jovanovic Znaj. This portfolio showcases my skills, projects, and passion for building modern web applications.
 
 Key Features:
 
@@ -52,40 +52,3 @@ This portfolio is not just a showcase of my work, but also a reflection of my de
 
 - **Vercel**: Hosting and continuous deployment
 - **GitHub Actions**: CI/CD pipeline
-
-## Basic Setup Instructions
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/your-username/your-repo.git
-   ```
-
-2. **Navigate to the project directory**
-
-   ```bash
-   cd your-repo
-   ```
-
-3. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-4. **Add .env.local with**
-
-   ```
-   NEXT_PUBLIC_GITHUB_TOKEN=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
-   ```
-
-5. **Run the development server**
-
-   ```bash
-   npm run dev
-   ```
-
-6. **Open in your browser**  
-   Visit `http://localhost:3000` to view the portfolio
-
-Note: Make sure you have Node.js (v18 or higher) installed on your system.

@@ -151,7 +151,7 @@ const About = () => {
               />
               <div className={styles.photoOverlay}>
                 <div className={styles.photoInfo}>
-                  <h3>Andrew Eroshenkov</h3>
+                  <h3>Andrei Eroshenkov</h3>
                   <p>Based in Serbia</p>
                 </div>
               </div>

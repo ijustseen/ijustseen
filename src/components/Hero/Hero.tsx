@@ -40,7 +40,7 @@ const Hero = () => {
       {/* Основной контент */}
       <div className={`${styles.contentContainer} ${isVisible ? styles.visible : ''}`}>
         <h1 className={styles.title}>
-          <span className={styles.nameSpan}>Andrew</span>
+          <span className={styles.nameSpan}>Andrei</span>
           <span className={styles.surnameSpan}>Eroshenkov</span>
         </h1>
         <p className={styles.subtitle}>Junior Full-Stack Web Developer</p>
